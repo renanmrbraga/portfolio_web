@@ -89,8 +89,8 @@ portfolio_web/
 ### 2. Clonar o repositório
 
 ```bash
-git clone https://github.com/renanmrbraga/portfolio-web.git
-cd portfolio-web
+git clone https://github.com/renanmrbraga/portfolio_web.git
+cd portfolio_web
 ```
 
 ### 3. Instalar as dependências

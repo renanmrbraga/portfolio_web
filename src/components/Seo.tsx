@@ -1,6 +1,6 @@
 // src/components/Seo.tsx
 import { Helmet } from "react-helmet-async";
-import { useLanguage } from "@/components/LanguageProvider";
+import { useLanguage } from "@/components/useLanguage";
 
 export function Seo() {
   const { t } = useLanguage();

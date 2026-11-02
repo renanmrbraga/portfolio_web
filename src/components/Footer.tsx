@@ -2,7 +2,7 @@
 import React from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "@/components/LanguageProvider";
+import { useLanguage } from "@/components/useLanguage";
 
 const Footer = () => {
   const { t } = useLanguage();

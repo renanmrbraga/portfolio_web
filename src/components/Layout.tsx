@@ -2,7 +2,7 @@
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Seo } from "./Seo";
-import { useLanguage } from "./LanguageProvider";
+import { useLanguage } from "./useLanguage";
 
 type LayoutProps = {
   children: ReactNode;

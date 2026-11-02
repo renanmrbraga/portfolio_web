@@ -1,78 +1,53 @@
-import React from "react";
-import { useLanguage } from "@/components/LanguageProvider";
+import { useLanguage } from "@/components/useLanguage";
+
+const skillSections = [
+  {
+    titleKey: "skills.section.etl",
+    items: ["skills.list.etlCore", "skills.list.etlFormats"],
+  },
+  {
+    titleKey: "skills.section.bi",
+    items: ["skills.list.biTools", "skills.list.biAnalysis"],
+  },
+  {
+    titleKey: "skills.section.ml",
+    items: ["skills.list.mlMethods", "skills.list.mlLibraries"],
+  },
+  {
+    titleKey: "skills.section.ai",
+    items: ["skills.list.aiModels", "skills.list.aiTechniques"],
+  },
+  {
+    titleKey: "skills.section.db",
+    items: ["skills.list.db", "skills.list.infra"],
+  },
+  {
+    titleKey: "skills.section.web",
+    items: ["skills.list.web"],
+  },
+] as const;
 
 const Skills = () => {
   const { t } = useLanguage();
-
-  const getList = (keys: string[]): string[] =>
-    keys.map((key) => t(key) as string);
 
   return (
     <section id="skills" className="space-y-6">
       <h2 className="text-2xl font-bold">{t("skills.title")}</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-base leading-relaxed">
-        <div>
-          <h3 className="text-lg font-semibold mb-1">{t("skills.section.etl")}</h3>
-          <ul className="list-disc list-inside space-y-1">
-            {getList([
-              "skills.list.python",
-              "skills.list.sql",
-              "skills.list.db"
-            ]).map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </div>
+      <div className="grid grid-cols-1 gap-8 text-base leading-relaxed sm:grid-cols-2">
+        {skillSections.map(({ titleKey, items }) => (
+          <div key={titleKey}>
+            <h3 className="mb-1 text-lg font-semibold">
+              {t(titleKey)}
+            </h3>
 
-        <div>
-          <h3 className="text-lg font-semibold mb-1">{t("skills.section.viz")}</h3>
-          <ul className="list-disc list-inside space-y-1">
-            {getList([
-              "skills.list.bi",
-              "skills.list.vizpython"
-            ]).map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-1">{t("skills.section.analysis")}</h3>
-          <ul className="list-disc list-inside space-y-1">
-            {getList([
-              "skills.list.ml",
-              "skills.list.tuning",
-              "skills.list.metrics"
-            ]).map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-1">{t("skills.section.ia")}</h3>
-          <ul className="list-disc list-inside space-y-1">
-            {getList([
-              "skills.list.llms",
-              "skills.list.rag"
-            ]).map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-1">{t("skills.section.dev")}</h3>
-          <ul className="list-disc list-inside space-y-1">
-            {getList([
-              "skills.list.arch",
-              "skills.list.deployment"
-            ]).map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </div>
+            <ul className="list-inside list-disc space-y-1">
+              {items.map((key) => (
+                <li key={key}>{t(key)}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </section>
   );

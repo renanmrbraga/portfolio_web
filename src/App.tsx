@@ -1,6 +1,6 @@
 // src/App.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { HelmetProvider } from "react-helmet-async";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,38 +11,92 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import { Layout } from "@/components/Layout";
 
 import Index from "./pages/Index";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfUse from "./pages/TermsOfUse";
-import ProfessionalAnalystPage from "./pages/ProfessionalAnalystPage";
-import FootballSciencePage from "./pages/FootballSciencePage";
 
-const queryClient = new QueryClient();
+
+
+
+import { lazy, Suspense } from "react";
+
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
+const EIDataBotPage = lazy(() => import("./pages/EIDataBotPage"));
+
+
 
 const App = () => (
   <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
+
       <ThemeProvider>
         <LanguageProvider defaultLanguage="pt">
           <TooltipProvider>
             <Toaster />
             <Sonner />
             <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Layout><Index /></Layout>} />
-                <Route path="/contact" element={<Layout><Contact /></Layout>} />
-                <Route path="/projects/professional-analyst" element={<Layout><ProfessionalAnalystPage /></Layout>} />
-                <Route path="/projects/football-science" element={<Layout><FootballSciencePage /></Layout>} />
-                <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
-                <Route path="/terms-of-use" element={<Layout><TermsOfUse /></Layout>} />
-                <Route path="*" element={<Layout><NotFound /></Layout>} />
-              </Routes>
+              <Suspense fallback={<div role="status" aria-live="polite" className="py-20 text-center">Carregando pagina...</div>}><Routes>
+                <Route
+                  path="/projects/ei-databot"
+                  element={
+                    <Layout>
+                      <Suspense
+                        fallback={
+                          <div role="status" aria-live="polite" className="py-20 text-center">
+                            Carregando pagina...
+                          </div>
+                        }
+                      >
+                        <EIDataBotPage />
+                      </Suspense>
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/"
+                  element={
+                    <Layout>
+                      <Index />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/contact"
+                  element={
+                    <Layout>
+                      <Contact />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/privacy-policy"
+                  element={
+                    <Layout>
+                      <PrivacyPolicy />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/terms-of-use"
+                  element={
+                    <Layout>
+                      <TermsOfUse />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="*"
+                  element={
+                    <Layout>
+                      <NotFound />
+                    </Layout>
+                  }
+                />
+              </Routes></Suspense>
             </BrowserRouter>
           </TooltipProvider>
         </LanguageProvider>
       </ThemeProvider>
-    </QueryClientProvider>
+
   </HelmetProvider>
 );
 

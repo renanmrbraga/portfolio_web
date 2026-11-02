@@ -5,12 +5,15 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Linkedin, Github, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "@/components/LanguageProvider";
+import { useLanguage } from "@/components/useLanguage";
 
 const Contact = () => {
   const { t } = useLanguage();
   const captchaRef = useRef(null);
   const [captchaToken, setCaptchaToken] = useState("");
+  const captchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY?.trim();
+  const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim();
+  const formAvailable = Boolean(captchaSiteKey && formspreeUrl);
 
   return (
     <div className="bg-background text-foreground min-h-screen theme-transition">
@@ -22,10 +25,10 @@ const Contact = () => {
             className="p-0 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
             asChild
           >
-            <a href="/">
+            <Link to="/">
               <ArrowLeft className="mr-2 h-4 w-4" />
               {t("contact.backHome")}
-            </a>
+            </Link>
           </Button>
         </div>
 
@@ -43,7 +46,10 @@ const Contact = () => {
             <h2 className="text-2xl font-bold mb-6">{t("contact.infoTitle")}</h2>
 
             <div className="space-y-6">
-              <ContactItem icon={<Mail className="h-5 w-5 text-blue-500" />} title={t("contact.email")}>
+              <ContactItem
+                icon={<Mail className="h-5 w-5 text-blue-500" />}
+                title={t("contact.email")}
+              >
                 <a
                   href="mailto:renanmbraga@outlook.com"
                   className="hover:text-blue-500 transition-colors"
@@ -52,7 +58,10 @@ const Contact = () => {
                 </a>
               </ContactItem>
 
-              <ContactItem icon={<MapPin className="h-5 w-5 text-blue-500" />} title={t("contact.location")}>
+              <ContactItem
+                icon={<MapPin className="h-5 w-5 text-blue-500" />}
+                title={t("contact.location")}
+              >
                 {t("contact.location.adress")}
               </ContactItem>
 
@@ -90,7 +99,7 @@ const Contact = () => {
             <h2 className="text-2xl font-bold mb-6">{t("contact.form.title")}</h2>
 
             <form
-              action={import.meta.env.VITE_FORMSPREE_URL}
+              action={formspreeUrl || undefined}
               method="POST"
               className="space-y-4"
               onSubmit={(e) => {
@@ -104,7 +113,10 @@ const Contact = () => {
               <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} />
 
               <div>
-                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
                   {t("contact.form.name")}
                 </label>
                 <input
@@ -118,7 +130,10 @@ const Contact = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
                   {t("contact.form.email")}
                 </label>
                 <input
@@ -132,7 +147,10 @@ const Contact = () => {
               </div>
 
               <div>
-                <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="message"
+                  className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
                   {t("contact.form.message")}
                 </label>
                 <textarea
@@ -146,16 +164,24 @@ const Contact = () => {
               </div>
 
               {/* hCaptcha */}
-              <HCaptcha
-                sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
-                onVerify={setCaptchaToken}
-                ref={captchaRef}
-              />
+              {captchaSiteKey ? (
+                <HCaptcha
+                  sitekey={captchaSiteKey}
+                  onVerify={setCaptchaToken}
+                  onExpire={() => setCaptchaToken("")}
+                  onError={() => setCaptchaToken("")}
+                  ref={captchaRef}
+                />
+              ) : (
+                <p role="status" className="text-sm text-amber-600 dark:text-amber-400">
+                  Formulario indisponivel: CAPTCHA nao configurado neste ambiente.
+                </p>
+              )}
 
               {/* Campo oculto para enviar o token ao backend/Formspree */}
               <input type="hidden" name="h-captcha-response" value={captchaToken} />
 
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button type="submit" disabled={!formAvailable} className="w-full bg-blue-600 hover:bg-blue-700">
                 {t("contact.form.submit")}
               </Button>
             </form>
@@ -167,7 +193,15 @@ const Contact = () => {
   );
 };
 
-const ContactItem = ({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
+const ContactItem = ({
+  icon,
+  title,
+  children
+}: {
+  icon: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
+}) => (
   <div className="flex">
     <div className="mr-3">{icon}</div>
     <div>

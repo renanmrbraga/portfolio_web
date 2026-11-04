@@ -1,9 +1,12 @@
 /**
- * Textos oficiais do EI DataBot no portfólio.
- * Mantidos em um único arquivo para evitar divergências entre card e página.
+ * Conteúdo bilíngue do projeto EI DataBot.
+ * Indicadores representam uma execução validada da v0.1.0-alpha.1,
+ * publicada em 03/11/2026. Não são métricas em tempo real.
  */
 
 export const EI_DATABOT_GITHUB = "https://github.com/renanmrbraga/ei_databot";
+export const EI_DATABOT_RELEASE = `${EI_DATABOT_GITHUB}/tree/v0.1.0-alpha.1`;
+export const EI_DATABOT_PREVIEW = "/dashboards/mapa-enade.png";
 
 export type EIDataBotStatus = "implemented" | "evolving" | "planned";
 
@@ -15,20 +18,29 @@ type ArchitectureItem = {
 
 type EIDataBotCopy = {
   title: string;
+  category: string;
+  version: string;
   cardDescription: string;
   headline: string;
   introduction: string;
   note: string;
   back: string;
   github: string;
+  release: string;
   architectureTitle: string;
   technologiesTitle: string;
   sourcesTitle: string;
   workflowTitle: string;
   roadmapTitle: string;
+  dashboardTitle: string;
+  dashboardDescription: string;
+  dashboardCaption: string;
+  dashboardAlt: string;
+  dashboardFallback: string;
   implementedLabel: string;
   evolvingLabel: string;
   plannedLabel: string;
+  statsTitle: string;
   stats: { value: string; label: string }[];
   architecture: ArchitectureItem[];
   workflow: string[];
@@ -40,176 +52,188 @@ type EIDataBotCopy = {
 export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
   pt: {
     title: "EI DataBot",
+    category: "Engenharia de Dados · Analytics · IA Aplicada",
+    version: "v0.1.0-alpha.1 · 03/11/2026",
     cardDescription:
-      "Plataforma de dados educacionais com ETL em Python/Polars, arquitetura Medallion e aproximadamente 2,7 milhões de registros processados. Modelo dimensional com 10 tabelas no PostgreSQL; FastAPI e IA/RAG em evolução.",
-    headline: "Engenharia de dados e inteligência analítica para a educação brasileira",
+      "Engenharia de dados educacionais com ETL em Python/Polars, PostgreSQL, modelagem dimensional, dashboards HTML e chatbot com Gemini e RAG. Alpha 1 validada com 2,7 milhões de registros Gold.",
+    headline: "Dados educacionais transformados em análises e consultas inteligentes",
     introduction:
-      "O EI DataBot integra dados públicos do IBGE/SIDRA e do INEP em uma base analítica estruturada. O pipeline em Python e Polars prepara dimensões e fatos para consultas, comparativos e visualizações, com PostgreSQL como fonte central de dados.",
+      "O EI DataBot integra bases públicas brasileiras, principalmente do INEP e do IBGE/SIDRA, em um fluxo de engenharia de dados que organiza, transforma, modela e disponibiliza indicadores educacionais. A solução reúne dashboards analíticos, API e recursos conversacionais de IA.",
     note:
-      "O pipeline e a sincronização dos dados estão implementados. A integração da API, das consultas assistidas por LLM e do RAG de metadados e regras de negócio continua em desenvolvimento.",
+      "Projeto em versão Alpha, voltado ao desenvolvimento e à validação técnica. Os números destacados refletem uma execução validada; a aplicação não é anunciada como serviço público em produção.",
     back: "Voltar ao portfólio",
-    github: "Ver código no GitHub",
-    architectureTitle: "Arquitetura e situação atual",
-    technologiesTitle: "Tecnologias",
-    sourcesTitle: "Fontes oficiais",
-    workflowTitle: "Fluxo dos dados",
-    roadmapTitle: "Evoluções em andamento",
+    github: "Código no GitHub",
+    release: "Código da Alpha 1",
+    architectureTitle: "Arquitetura e componentes",
+    technologiesTitle: "Tecnologias principais",
+    sourcesTitle: "Fontes de dados",
+    workflowTitle: "Jornada dos dados",
+    roadmapTitle: "Próximas evoluções",
+    dashboardTitle: "Dashboard Educação: Mapa do Enade",
+    dashboardDescription:
+      "Prévia do mapa de conceitos do Enade por município de oferta, com volumes de ingressantes obtidos do Censo da Educação Superior. Os indicadores respeitam recortes e anos-base distintos.",
+    dashboardCaption:
+      "Captura somente leitura, gerada a partir do HTML local do EI DataBot. A imagem é atualizada ao sincronizar o projeto no computador; a versão pública muda após a próxima publicação do portfólio.",
+    dashboardAlt: "Prévia estática da página Mapa do Enade do dashboard Educação",
+    dashboardFallback:
+      "Prévia ainda não gerada. No computador de desenvolvimento, gere o dashboard Educação e execute npm run sync:enade no portfólio.",
     implementedLabel: "Implementado",
     evolvingLabel: "Em evolução",
     plannedLabel: "Planejado",
+    statsTitle: "Resultados validados da Alpha 1",
     stats: [
-      { value: "~2,7 milhões", label: "Registros processados na etapa reportada" },
-      { value: "5 + 5", label: "Dimensões e tabelas fato" },
-      { value: "PostgreSQL", label: "Base central para análise e persistência" }
+      { value: "2.702.972", label: "Registros em 10 tabelas Gold no PostgreSQL" },
+      { value: "27/27", label: "Etapas concluídas na execução integral do ETL" },
+      { value: "5 + 5", label: "Dimensões e tabelas fato na camada Gold" },
+      { value: "56", label: "Testes Python aprovados na validação" }
     ],
     architecture: [
       {
-        title: "Pipeline Medallion",
+        title: "ETL em camadas",
         description:
-          "Raw, Bronze, Silver e Gold com Python, Polars e Parquet, incluindo normalização, qualidade e modelagem dimensional.",
+          "Raw, Bronze, Silver e Gold com Python 3.13, Polars e Parquet. Validações estruturais e preparação de indicadores para análise.",
         status: "implemented"
       },
       {
-        title: "Persistência e governança",
+        title: "PostgreSQL e modelagem dimensional",
         description:
-          "Sincronização com PostgreSQL, estruturas relacionais, JSONB, índices GIN, auditoria e controles de alterações.",
+          "Dez tabelas Gold (cinco dimensões e cinco fatos), além dos schemas app para histórico JSONB e rag para recuperação documental com pgvector.",
         status: "implemented"
       },
       {
-        title: "API e interface",
+        title: "Dashboards analíticos",
         description:
-          "Backend FastAPI e frontend React/TypeScript existentes, com integração e visualizações sendo aperfeiçoadas.",
+          "Geração de relatórios HTML/CSS/JavaScript independentes de conexão contínua ao banco, com rankings, gráficos, mapas e evolução de indicadores.",
+        status: "implemented"
+      },
+      {
+        title: "API, chatbot e IA",
+        description:
+          "Backend FastAPI integrado a serviços de análise, Google Gemini, RAG e persistência de sessões. A homologação funcional completa da integração permanece em evolução.",
         status: "evolving"
       },
       {
-        title: "Consultas assistidas por LLM",
+        title: "Frontend e infraestrutura",
         description:
-          "Interpretação de perguntas e consultas SQL controladas, mantendo os números oficiais no PostgreSQL.",
-        status: "evolving"
-      },
-      {
-        title: "RAG de documentação",
-        description:
-          "Recuperação de metadados, definições e regras de negócio; pgvector é parte da arquitetura-alvo.",
-        status: "planned"
+          "React, TypeScript, Vite e npm no frontend; Docker Compose para PostgreSQL, API e aplicação no ambiente local.",
+        status: "implemented"
       }
     ],
     workflow: [
-      "Coleta de dados públicos do IBGE/SIDRA e INEP.",
-      "Ingestão e transformação com Polars nas camadas Raw, Bronze, Silver e Gold.",
-      "Modelagem dimensional, auditoria e sincronização com PostgreSQL.",
-      "Consumo por APIs e dashboards; integração com IA em desenvolvimento."
+      "Obtenção e organização de fontes oficiais de educação básica e superior.",
+      "Tratamento com Python/Polars em Raw, Bronze, Silver e Gold.",
+      "Modelagem dimensional e publicação dos resultados no PostgreSQL.",
+      "Exploração em dashboards HTML e serviços analíticos via FastAPI.",
+      "Consulta conversacional com Gemini e recuperação de contexto por RAG."
     ],
     sources: [
-      "IBGE / SIDRA: população e indicadores socioeconômicos municipais",
-      "INEP / Censo Escolar: educação básica, escolas e matrículas",
-      "INEP / Censo da Educação Superior: instituições e cursos",
-      "INEP / ENADE, CPC, IDD e IGC: indicadores de qualidade"
+      "INEP: Censo Escolar e Censo da Educação Superior",
+      "INEP: Enade, CPC, IDD e IGC",
+      "IBGE / SIDRA: referências territoriais e indicadores complementares"
     ],
     technologies: [
-      "Python",
-      "Polars",
-      "Parquet",
-      "PostgreSQL",
-      "SQL",
-      "JSONB",
-      "FastAPI",
-      "React",
-      "TypeScript",
-      "Vite",
-      "Docker"
+      "Python 3.13", "Polars", "Parquet", "PostgreSQL 17", "SQL", "pgvector",
+      "JSONB", "FastAPI", "Gemini", "RAG", "HTML", "CSS", "JavaScript",
+      "React", "TypeScript", "Vite", "Docker Compose", "Ruff"
     ],
     roadmap: [
-      "Consolidar agentes e consultas SQL assistidas por LLM.",
-      "Incorporar RAG de regras de negócio com PostgreSQL/pgvector.",
-      "Integrar dashboards e respostas contextualizadas ao frontend."
+      "Concluir revisões humanas dos documentos do RAG e verificar a sincronização dos embeddings.",
+      "Ampliar os testes de integração e a validação funcional do chatbot.",
+      "Reforçar autenticação, autorização e segurança antes de qualquer exposição pública da aplicação.",
+      "Evoluir os dashboards e acompanhar as dependências da versão Alpha."
     ]
   },
   en: {
     title: "EI DataBot",
+    category: "Data Engineering · Analytics · Applied AI",
+    version: "v0.1.0-alpha.1 · Nov 3, 2026",
     cardDescription:
-      "Educational data platform with Python/Polars ETL, Medallion architecture, and approximately 2.7 million processed records. Ten-table dimensional model in PostgreSQL; FastAPI and AI/RAG are in development.",
-    headline: "Data engineering and analytics for Brazilian education",
+      "Educational data engineering with Python/Polars ETL, PostgreSQL, dimensional modeling, HTML dashboards, and a Gemini/RAG chatbot. Alpha 1 validation covered 2.7 million Gold records.",
+    headline: "Turning education datasets into analytics and intelligent queries",
     introduction:
-      "EI DataBot integrates public data from IBGE/SIDRA and INEP into a structured analytical database. Its Python and Polars pipeline prepares dimensions and fact tables for queries, comparisons, and visualizations, using PostgreSQL as the central data store.",
+      "EI DataBot brings together Brazilian public datasets, primarily from INEP and IBGE/SIDRA, in a data engineering workflow that organizes, transforms, models, and serves education indicators. The solution includes analytical dashboards, an API, and conversational AI capabilities.",
     note:
-      "The data pipeline and PostgreSQL synchronization are implemented. API integration, LLM-assisted queries, and metadata/business-rule RAG are still under development.",
+      "An Alpha-stage project focused on development and technical validation. Featured numbers come from a validated pipeline run; the application is not presented as a publicly deployed production service.",
     back: "Back to portfolio",
-    github: "View source on GitHub",
-    architectureTitle: "Architecture and implementation status",
-    technologiesTitle: "Technologies",
-    sourcesTitle: "Official data sources",
-    workflowTitle: "Data workflow",
-    roadmapTitle: "Ongoing development",
+    github: "Source code on GitHub",
+    release: "Alpha 1 source",
+    architectureTitle: "Architecture and components",
+    technologiesTitle: "Core technologies",
+    sourcesTitle: "Data sources",
+    workflowTitle: "Data journey",
+    roadmapTitle: "Next improvements",
+    dashboardTitle: "Education Dashboard: Enade Map",
+    dashboardDescription:
+      "Preview of Enade scores mapped by the municipalities offering programs, alongside incoming-student volumes from the Higher Education Census. Indicators follow their respective reference-year definitions.",
+    dashboardCaption:
+      "Read-only screenshot generated from EI DataBot's local HTML. It refreshes when the projects are synchronized on the development computer; the public version changes after the next portfolio deployment.",
+    dashboardAlt: "Static preview of the Enade Map page in the Education Dashboard",
+    dashboardFallback:
+      "Preview not generated yet. On the development computer, generate the Education dashboard and run npm run sync:enade in the portfolio.",
     implementedLabel: "Implemented",
-    evolvingLabel: "In progress",
+    evolvingLabel: "Evolving",
     plannedLabel: "Planned",
+    statsTitle: "Alpha 1 validated results",
     stats: [
-      { value: "~2.7 million", label: "Records processed at the reported stage" },
-      { value: "5 + 5", label: "Dimensions and fact tables" },
-      { value: "PostgreSQL", label: "Central analytical and operational store" }
+      { value: "2,702,972", label: "Records in ten PostgreSQL Gold tables" },
+      { value: "27/27", label: "Stages completed in the full ETL run" },
+      { value: "5 + 5", label: "Dimensions and fact tables in the Gold layer" },
+      { value: "56", label: "Python tests passed during validation" }
     ],
     architecture: [
       {
-        title: "Medallion pipeline",
+        title: "Layered ETL",
         description:
-          "Raw, Bronze, Silver, and Gold layers with Python, Polars, and Parquet, covering normalization, quality, and dimensional modeling.",
+          "Raw, Bronze, Silver, and Gold with Python 3.13, Polars, and Parquet. Structural checks and preparation of analytical metrics.",
         status: "implemented"
       },
       {
-        title: "Storage and governance",
+        title: "PostgreSQL and dimensional modeling",
         description:
-          "PostgreSQL synchronization, relational structures, JSONB, GIN indexes, audit trails, and change controls.",
+          "Ten Gold tables (five dimensions and five facts), plus app for JSONB-based history and rag for pgvector-backed document retrieval.",
         status: "implemented"
       },
       {
-        title: "API and frontend",
+        title: "Analytical dashboards",
         description:
-          "Existing FastAPI backend and React/TypeScript frontend, with integrations and visualizations being refined.",
+          "HTML/CSS/JavaScript reports that work without continuous database requests, including rankings, charts, maps, and trends.",
+        status: "implemented"
+      },
+      {
+        title: "API, chatbot, and AI",
+        description:
+          "FastAPI backend with analytical services, Google Gemini, RAG, and persistent sessions. Complete functional integration testing is still ongoing.",
         status: "evolving"
       },
       {
-        title: "LLM-assisted queries",
+        title: "Frontend and infrastructure",
         description:
-          "Question interpretation and constrained SQL queries, with official numeric data retained in PostgreSQL.",
-        status: "evolving"
-      },
-      {
-        title: "Documentation RAG",
-        description:
-          "Retrieval of metadata, metric definitions, and business rules; pgvector is part of the target architecture.",
-        status: "planned"
+          "React, TypeScript, Vite, and npm for the frontend; Docker Compose for PostgreSQL, the API, and local application services.",
+        status: "implemented"
       }
     ],
     workflow: [
-      "Collect public IBGE/SIDRA and INEP datasets.",
-      "Ingest and transform data in Raw, Bronze, Silver, and Gold layers using Polars.",
-      "Build dimensional models, audit, and synchronize with PostgreSQL.",
-      "Serve APIs and dashboards; AI integration remains under development."
+      "Collect and organize official basic and higher education datasets.",
+      "Process with Python/Polars through Raw, Bronze, Silver, and Gold.",
+      "Model dimensions and facts, then publish to PostgreSQL.",
+      "Explore indicators through HTML dashboards and FastAPI services.",
+      "Support conversational queries with Gemini and RAG-based context retrieval."
     ],
     sources: [
-      "IBGE / SIDRA: municipal population and socioeconomic indicators",
-      "INEP / School Census: basic education, schools, and enrollment",
-      "INEP / Higher Education Census: institutions and programs",
-      "INEP / ENADE, CPC, IDD, and IGC: quality indicators"
+      "INEP: School Census and Higher Education Census",
+      "INEP: Enade, CPC, IDD, and IGC",
+      "IBGE / SIDRA: geographic references and supplementary indicators"
     ],
     technologies: [
-      "Python",
-      "Polars",
-      "Parquet",
-      "PostgreSQL",
-      "SQL",
-      "JSONB",
-      "FastAPI",
-      "React",
-      "TypeScript",
-      "Vite",
-      "Docker"
+      "Python 3.13", "Polars", "Parquet", "PostgreSQL 17", "SQL", "pgvector",
+      "JSONB", "FastAPI", "Gemini", "RAG", "HTML", "CSS", "JavaScript",
+      "React", "TypeScript", "Vite", "Docker Compose", "Ruff"
     ],
     roadmap: [
-      "Consolidate agents and LLM-assisted SQL queries.",
-      "Add PostgreSQL/pgvector RAG for business rules.",
-      "Integrate dashboards and contextual answers into the frontend."
+      "Finish human review of RAG documents and verify embedding synchronization.",
+      "Expand integration tests and full chatbot functional validation.",
+      "Strengthen authentication, authorization, and security before any public application exposure.",
+      "Improve dashboards and monitor Alpha-stage dependencies."
     ]
   }
 };

@@ -14,7 +14,7 @@ export function Seo() {
     <Helmet htmlAttributes={{ lang }}>
       <title>{t("seo.title")}</title>
       <meta name="description" content={t("seo.description")} />
-      <meta name="author" content="Renan Martins Braga" />
+      <meta name="author" content="Renan Braga" />
       <link rel="canonical" href={canonical} />
 
       {/* Open Graph */}
@@ -24,7 +24,7 @@ export function Seo() {
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={ogImage} />
       <meta property="og:locale" content={t("seo.locale")} />
-      <meta property="og:site_name" content="Renan Martins Braga" />
+      <meta property="og:site_name" content="Renan Braga" />
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

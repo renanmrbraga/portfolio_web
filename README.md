@@ -1,4 +1,4 @@
-# Portfolio Web | Renan Martins Braga
+# Portfolio Web | Renan Braga
 
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -30,17 +30,17 @@ Atualmente, os projetos em destaque são o próprio **Portfolio Web** e o **EI D
 
 O projeto segue uma **arquitetura de componentes React**, com responsabilidades distribuídas entre interface, conteúdo, navegação, estado compartilhado e serviços externos.
 
-| Camada                  | Implementação                       | Responsabilidade                                           |
-| ----------------------- | ----------------------------------- | ---------------------------------------------------------- |
-| Interface               | React + TypeScript                  | Componentes e páginas tipadas                              |
-| Build e desenvolvimento | Vite + SWC                          | Servidor local e geração de arquivos de produção           |
-| Estilização             | Tailwind CSS + shadcn/ui + Radix UI | Layout, temas e componentes acessíveis                     |
-| Navegação               | React Router DOM                    | Roteamento da SPA                                          |
-| Estado compartilhado    | Context API + hooks                 | Idioma e tema, com persistência local                      |
-| Animações | CSS e IntersectionObserver | Animações sem dependência adicional |
-| SEO                     | React Helmet Async                  | Título, descrição e metadados por idioma                   |
-| Formulário              | Formspree + hCaptcha                | Envio de mensagens e verificação de desafio                |
-| Hospedagem              | Configuração Vercel                 | Build estático e fallback de rotas da SPA                  |
+| Camada                  | Implementação                       | Responsabilidade                                 |
+| ----------------------- | ----------------------------------- | ------------------------------------------------ |
+| Interface               | React + TypeScript                  | Componentes e páginas tipadas                    |
+| Build e desenvolvimento | Vite + SWC                          | Servidor local e geração de arquivos de produção |
+| Estilização             | Tailwind CSS + shadcn/ui + Radix UI | Layout, temas e componentes acessíveis           |
+| Navegação               | React Router DOM                    | Roteamento da SPA                                |
+| Estado compartilhado    | Context API + hooks                 | Idioma e tema, com persistência local            |
+| Animações               | CSS e IntersectionObserver          | Animações sem dependência adicional              |
+| SEO                     | React Helmet Async                  | Título, descrição e metadados por idioma         |
+| Formulário              | Formspree + hCaptcha                | Envio de mensagens e verificação de desafio      |
+| Hospedagem              | Configuração Vercel                 | Build estático e fallback de rotas da SPA        |
 
 ### Fluxo da aplicação
 
@@ -183,4 +183,4 @@ Distribuído sob a [Licença MIT](LICENSE).
 
 ---
 
-© 2026 Renan Martins Braga. Todos os direitos reservados.
+© 2026 Renan Braga. Todos os direitos reservados.

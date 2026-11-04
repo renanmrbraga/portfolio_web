@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
 
         <p className="dark:text-gray-400 text-gray-600 text-sm">
-          &copy; {new Date().getFullYear()} Renan Martins Braga - {t("footer.rights")}
+          &copy; {new Date().getFullYear()} Renan Braga - {t("footer.rights")}
         </p>
         <div className="mt-4 space-x-4">
           <Link

@@ -3,9 +3,10 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Linkedin, Github, ArrowLeft } from "lucide-react";
+import { Mail, MapPin, Linkedin, Github, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/components/useLanguage";
+import { getAttribution } from "@/lib/attribution";
 
 const Contact = () => {
   const { t } = useLanguage();
@@ -14,6 +15,7 @@ const Contact = () => {
   const captchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY?.trim();
   const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim();
   const formAvailable = Boolean(captchaSiteKey && formspreeUrl);
+  const attribution = getAttribution();
 
   return (
     <div className="bg-background text-foreground min-h-screen theme-transition">
@@ -101,14 +103,40 @@ const Contact = () => {
             <form
               action={formspreeUrl || undefined}
               method="POST"
+              acceptCharset="UTF-8"
               className="space-y-4"
-              onSubmit={(e) => {
+              onSubmit={(event) => {
+                if (!formAvailable) {
+                  event.preventDefault();
+                  alert("Formulário temporariamente indisponível.");
+                  return;
+                }
+
                 if (!captchaToken) {
-                  e.preventDefault();
+                  event.preventDefault();
                   alert("Por favor, resolva o CAPTCHA antes de enviar.");
                 }
               }}
             >
+              {/* Dados de atribuição da visita */}
+              <input type="hidden" name="utm_source" value={attribution?.utm_source ?? ""} />
+
+              <input type="hidden" name="utm_medium" value={attribution?.utm_medium ?? ""} />
+
+              <input type="hidden" name="utm_campaign" value={attribution?.utm_campaign ?? ""} />
+
+              <input type="hidden" name="utm_content" value={attribution?.utm_content ?? ""} />
+
+              <input type="hidden" name="utm_term" value={attribution?.utm_term ?? ""} />
+
+              <input type="hidden" name="landing_page" value={attribution?.landing_page ?? ""} />
+
+              <input type="hidden" name="referrer" value={attribution?.referrer ?? ""} />
+
+              <input type="hidden" name="captured_at" value={attribution?.captured_at ?? ""} />
+
+              <input type="hidden" name="contact_page" value={window.location.pathname} />
+
               {/* Honeypot */}
               <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} />
 
@@ -124,6 +152,8 @@ const Contact = () => {
                   name="name"
                   id="name"
                   required
+                  minLength={2}
+                  maxLength={100}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   placeholder={t("contact.form.namePlaceholder")}
                 />
@@ -141,6 +171,7 @@ const Contact = () => {
                   name="email"
                   id="email"
                   required
+                  maxLength={254}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   placeholder={t("contact.form.emailPlaceholder")}
                 />
@@ -157,6 +188,8 @@ const Contact = () => {
                   name="message"
                   id="message"
                   required
+                  minLength={10}
+                  maxLength={5000}
                   rows={5}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   placeholder={t("contact.form.messagePlaceholder")}
@@ -181,7 +214,11 @@ const Contact = () => {
               {/* Campo oculto para enviar o token ao backend/Formspree */}
               <input type="hidden" name="h-captcha-response" value={captchaToken} />
 
-              <Button type="submit" disabled={!formAvailable} className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button
+                type="submit"
+                disabled={!formAvailable || !captchaToken}
+                className="w-full bg-blue-600 hover:bg-blue-700"
+              >
                 {t("contact.form.submit")}
               </Button>
             </form>

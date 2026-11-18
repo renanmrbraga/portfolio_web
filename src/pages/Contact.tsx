@@ -10,12 +10,71 @@ import { getAttribution } from "@/lib/attribution";
 
 const Contact = () => {
   const { t } = useLanguage();
-  const captchaRef = useRef(null);
+  const captchaRef = useRef<HCaptcha>(null);
   const [captchaToken, setCaptchaToken] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  // Bloqueio imediato para impedir envios simultâneos.
+  const submittingRef = useRef(false);
   const captchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY?.trim();
   const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim();
   const formAvailable = Boolean(captchaSiteKey && formspreeUrl);
   const attribution = getAttribution();
+
+  /**
+   * Envia o formulário sem sair da página.
+   * Mantém as UTMs e as proteções antispam existentes.
+   */
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (submittingRef.current || submitStatus === "success") {
+      return;
+    }
+
+    if (!formAvailable || !formspreeUrl || !captchaToken) {
+      setSubmitStatus("error");
+      return;
+    }
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Garante que o token atualizado seja enviado.
+    formData.set("h-captcha-response", captchaToken);
+
+    submittingRef.current = true;
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch(formspreeUrl, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Formspree HTTP ${response.status}`);
+      }
+
+      // Limpa somente após confirmação do Formspree.
+      form.reset();
+      setSubmitStatus("success");
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      // O token hCaptcha não deve ser reutilizado.
+      captchaRef.current?.resetCaptcha();
+      setCaptchaToken("");
+
+      submittingRef.current = false;
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="bg-background text-foreground min-h-screen theme-transition">
@@ -105,18 +164,7 @@ const Contact = () => {
               method="POST"
               acceptCharset="UTF-8"
               className="space-y-4"
-              onSubmit={(event) => {
-                if (!formAvailable) {
-                  event.preventDefault();
-                  alert("Formulário temporariamente indisponível.");
-                  return;
-                }
-
-                if (!captchaToken) {
-                  event.preventDefault();
-                  alert("Por favor, resolva o CAPTCHA antes de enviar.");
-                }
-              }}
+              onSubmit={handleSubmit}
             >
               {/* Dados de atribuição da visita */}
               <input type="hidden" name="utm_source" value={attribution?.utm_source ?? ""} />
@@ -216,11 +264,25 @@ const Contact = () => {
 
               <Button
                 type="submit"
-                disabled={!formAvailable || !captchaToken}
+                disabled={
+                  !formAvailable || !captchaToken || isSubmitting || submitStatus === "success"
+                }
                 className="w-full bg-blue-600 hover:bg-blue-700"
               >
-                {t("contact.form.submit")}
+                {isSubmitting ? "Enviando..." : t("contact.form.submit")}
               </Button>
+              {submitStatus === "success" && (
+                <p role="status" className="text-sm text-green-600 dark:text-green-400">
+                  Mensagem enviada com sucesso. Obrigado pelo contato!
+                </p>
+              )}
+
+              {submitStatus === "error" && (
+                <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+                  Não foi possível confirmar o envio. Verifique sua conexão, resolva novamente o
+                  CAPTCHA e tente outra vez.
+                </p>
+              )}
             </form>
           </div>
         </div>

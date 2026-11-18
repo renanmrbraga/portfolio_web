@@ -9,11 +9,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { Layout } from "@/components/Layout";
+import { AttributionTracker } from "@/components/AttributionTracker";
 
 import Index from "./pages/Index";
-
-
-
 
 import { lazy, Suspense } from "react";
 
@@ -23,18 +21,23 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
 const EIDataBotPage = lazy(() => import("./pages/EIDataBotPage"));
 
-
-
 const App = () => (
   <HelmetProvider>
-
-      <ThemeProvider>
-        <LanguageProvider defaultLanguage="pt">
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Suspense fallback={<div role="status" aria-live="polite" className="py-20 text-center">Carregando pagina...</div>}><Routes>
+    <ThemeProvider>
+      <LanguageProvider defaultLanguage="pt">
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AttributionTracker />
+            <Suspense
+              fallback={
+                <div role="status" aria-live="polite" className="py-20 text-center">
+                  Carregando pagina...
+                </div>
+              }
+            >
+              <Routes>
                 <Route
                   path="/projects/ei-databot"
                   element={
@@ -91,12 +94,12 @@ const App = () => (
                     </Layout>
                   }
                 />
-              </Routes></Suspense>
-            </BrowserRouter>
-          </TooltipProvider>
-        </LanguageProvider>
-      </ThemeProvider>
-
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   </HelmetProvider>
 );
 

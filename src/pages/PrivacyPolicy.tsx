@@ -67,6 +67,22 @@ const PrivacyPolicy = () => {
               <li className="mb-2">{t("privacy.section4.item4")}</li>
             </ul>
 
+            {/* Google Analytics 4 e gerenciamento do consentimento */}
+            <section aria-labelledby="privacy-analytics-title">
+              <h2
+                id="privacy-analytics-title"
+                className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900"
+              >
+                {t("privacy.analytics.title")}
+              </h2>
+
+              <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.analytics.desc")}</p>
+
+              <p className="mb-6 dark:text-gray-300 text-gray-700">
+                {t("privacy.analytics.consent")}
+              </p>
+            </section>
+
             <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
               {t("privacy.section5")}
             </h2>

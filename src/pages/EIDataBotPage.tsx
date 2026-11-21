@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 import Footer from "@/components/Footer";
@@ -8,8 +7,6 @@ import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/components/useLanguage";
 import { Button } from "@/components/ui/button";
 import { EI_DATABOT_GITHUB, EI_DATABOT_PREVIEW, EI_DATABOT_RELEASE } from "@/content/ei-databot";
-
-const PAGE_URL = "https://renanmrbraga.vercel.app/projects/ei-databot";
 
 type Language = "pt" | "en";
 type Status = "validated" | "implemented" | "limited" | "pending";
@@ -397,18 +394,9 @@ const EIDataBotPage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground theme-transition">
-      <Helmet htmlAttributes={{ lang: language === "pt" ? "pt-BR" : "en" }}>
-        <title>{`${content.title} | Renan Braga`}</title>
-        <meta name="description" content={content.introduction} />
-        <meta property="og:title" content={`${content.title} | Renan Braga`} />
-        <meta property="og:description" content={content.introduction} />
-        <meta property="og:url" content={PAGE_URL} />
-        <link rel="canonical" href={PAGE_URL} />
-      </Helmet>
-
       <Navbar />
 
-      <main className="mx-auto w-full max-w-5xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
         <Link
           to="/"
           className="mb-8 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-blue-700 dark:text-gray-300 dark:hover:text-blue-400"
@@ -624,7 +612,7 @@ const EIDataBotPage = () => {
             {content.securityDescription}
           </p>
         </section>
-      </main>
+      </div>
 
       <Footer />
     </div>

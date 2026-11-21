@@ -1,5 +1,5 @@
 import { LanguageProviderContext, type Language } from "./language-context";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type LanguageProviderProps = {
   children: React.ReactNode;
@@ -12,9 +12,6 @@ const translations = {
     // SEO
     "seo.title": "Renan Braga • Portfólio",
     "seo.description": "Portfólio profissional de Renan Braga - Analista de Dados.",
-    "seo.ogTitle": "Renan Braga • Portfólio",
-    "seo.ogDescription": "Portfólio profissional de Renan Braga - Analista de Dados.",
-    "seo.locale": "pt_BR",
     // Navbar
     contact: "Contato",
     github: "GitHub",
@@ -33,12 +30,6 @@ const translations = {
     "contact.title": "Entre em Contato",
     "contact.subtitle":
       "Estou disponível para novos projetos, colaborações e oportunidades. Ficarei feliz em conversar sobre como posso ajudar.",
-    "contact.infoTitle": "Informações de Contato",
-    "contact.email": "E-mail",
-    "contact.phone": "Telefone",
-    "contact.location": "Localização",
-    "contact.location.adress": "Volta Redonda, RJ - Brasil",
-    "contact.social": "Redes Sociais",
     "contact.form.title": "Envie uma Mensagem",
     "contact.form.name": "Nome",
     "contact.form.namePlaceholder": "Seu nome",
@@ -47,112 +38,98 @@ const translations = {
     "contact.form.message": "Mensagem",
     "contact.form.messagePlaceholder": "Sua mensagem aqui...",
     "contact.form.submit": "Enviar Mensagem",
+    "contact.form.submitting": "Enviando...",
+    "contact.form.success": "Mensagem enviada com sucesso. Obrigado pelo contato!",
+    "contact.form.error":
+      "Não foi possível confirmar o envio. Verifique sua conexão, resolva novamente o CAPTCHA e tente outra vez.",
+    "contact.captcha.unavailable":
+      "Formulário indisponível: CAPTCHA não configurado neste ambiente.",
+    "contact.captcha.error":
+      "Não foi possível carregar a verificação de segurança. O envio do formulário está indisponível neste ambiente.",
     // Privacy Policy
     "privacy.title": "Política de Privacidade",
-    "privacy.updated": "Última atualização: Junho 2024",
-    "privacy.section1": "1. Informações que Coletamos",
+    "privacy.updated": "Última atualização: 21 de novembro de 2026",
+    "privacy.section1": "1. Informações Tratadas",
     "privacy.section1.desc":
-      "Ao utilizar nosso site, podemos coletar certos tipos de informações, incluindo:",
+      "Este portfólio utiliza recursos de navegação e contato. Conforme sua interação, as seguintes informações podem ser tratadas:",
     "privacy.section1.item1":
-      "Informações básicas de uso, como páginas visitadas e tempo gasto no site",
-    "privacy.section1.item2": "Informações de contato que você nos fornecer voluntariamente",
-    "privacy.section1.item3": "Cookies e tecnologias semelhantes para melhorar sua experiência",
-    "privacy.section2": "2. Como Usamos suas Informações",
-    "privacy.section2.desc": "Utilizamos as informações coletadas para:",
-    "privacy.section2.item1": "Fornecer, manter e melhorar nosso site",
-    "privacy.section2.item2": "Responder a suas solicitações e comunicações",
-    "privacy.section2.item3": "Analisar como os usuários interagem com nosso site",
-    "privacy.section2.item4": "Proteger contra atividades fraudulentas ou abusivas",
-    "privacy.section3": "3. Compartilhamento de Informações",
+      "Preferências de idioma e tema armazenadas localmente no navegador (localStorage).",
+    "privacy.section1.item2":
+      "Parâmetros UTM, página de entrada, origem da referência e data da visita, armazenados durante a sessão (sessionStorage).",
+    "privacy.section1.item3":
+      "Nome, e-mail, mensagem e informações necessárias à verificação antispam quando o formulário de contato é utilizado.",
+    "privacy.section2": "2. Finalidades do Tratamento",
+    "privacy.section2.desc": "As informações são utilizadas para:",
+    "privacy.section2.item1": "Manter as preferências de idioma e aparência do portfólio.",
+    "privacy.section2.item2": "Receber e responder às mensagens enviadas pelo formulário.",
+    "privacy.section2.item3":
+      "Identificar a origem dos contatos por meio de parâmetros UTM, quando disponíveis.",
+    "privacy.section2.item4": "Reduzir envios automatizados, abusos e tentativas de spam.",
+    "privacy.section3": "3. Serviços Externos",
     "privacy.section3.desc":
-      "Não vendemos suas informações pessoais. Podemos compartilhar informações em circunstâncias limitadas:",
-    "privacy.section3.item1": "Com prestadores de serviços que nos auxiliam na operação do site",
-    "privacy.section3.item2": "Para cumprir obrigações legais",
-    "privacy.section3.item3": "Para proteger direitos, propriedade ou segurança",
-    "privacy.section4": "4. Seus Direitos",
+      "O portfólio utiliza serviços externos que podem tratar informações necessárias ao funcionamento de seus recursos:",
+    "privacy.section3.item1": "Vercel: hospedagem do site e processamento técnico das requisições.",
+    "privacy.section3.item2":
+      "Formspree: processamento das mensagens e dos dados de atribuição enviados pelo formulário.",
+    "privacy.section3.item3":
+      "hCaptcha: verificação antispam, com tratamento de dados conforme sua própria política de privacidade.",
+    "privacy.section4": "4. Seus Direitos e Escolhas",
     "privacy.section4.desc":
-      "Dependendo da sua localização, você pode ter direitos específicos em relação aos seus dados, incluindo:",
-    "privacy.section4.item1": "Acessar os dados que temos sobre você",
-    "privacy.section4.item2": "Corrigir dados imprecisos",
-    "privacy.section4.item3": "Excluir seus dados em determinadas circunstâncias",
-    "privacy.section4.item4": "Restringir ou se opor a certos processamentos de dados",
-    "privacy.section5": "5. Contato",
+      "Conforme a legislação aplicável, incluindo a LGPD, você pode solicitar:",
+    "privacy.section4.item1":
+      "Confirmação da existência de tratamento e acesso aos seus dados pessoais.",
+    "privacy.section4.item2": "Correção de informações incompletas, inexatas ou desatualizadas.",
+    "privacy.section4.item3":
+      "Anonimização, bloqueio ou eliminação de dados nas hipóteses previstas em lei.",
+    "privacy.section4.item4":
+      "Revogação do consentimento, quando aplicável, e informações sobre o tratamento de dados.",
+    "privacy.analytics.title": "Google Analytics 4",
+    "privacy.analytics.desc":
+      "Utilizamos o Google Analytics 4 para compreender a navegação no portfólio, incluindo páginas visitadas, origem das visitas e interações com o formulário de contato. A coleta analítica ocorre somente após sua autorização explícita. Não enviamos ao Google Analytics nomes, endereços de e-mail ou o conteúdo das mensagens.",
+    "privacy.analytics.consent":
+      "Você pode aceitar, recusar ou alterar sua preferência a qualquer momento pelo link Preferências de privacidade no rodapé. A recusa não impede a utilização do site. Ao revogar a autorização, interrompemos novos envios analíticos; isso não exclui automaticamente dados coletados anteriormente.",
+    "privacy.section5": "5. Contato e Atualizações",
     "privacy.section5.desc":
-      "Se você tiver dúvidas sobre esta Política de Privacidade, entre em contato comigo através dos canais disponíveis na página de Contato.",
+      "Para dúvidas ou solicitações relacionadas aos seus dados pessoais, utilize a página de Contato ou o e-mail renanmbraga@outlook.com. Esta política poderá ser atualizada quando os recursos do portfólio forem modificados.",
     // Terms of Use
     "terms.title": "Termos de Uso",
-    "terms.updated": "Última atualização: Junho 2024",
+    "terms.updated": "Última atualização: 21 de novembro de 2026",
     "terms.intro":
-      "Ao acessar e utilizar este site, você concorda com os seguintes Termos de Uso. Por favor, leia-os cuidadosamente.",
+      "Este portfólio apresenta informações profissionais, competências técnicas e projetos de desenvolvimento. Ao utilizar o site, você deve respeitar a legislação aplicável e as condições descritas nestes termos.",
     "terms.section1": "1. Uso do Site",
     "terms.section1.desc":
-      "O conteúdo deste site é fornecido apenas para fins informativos. Ao utilizar este site, você concorda em:",
+      "O conteúdo está disponível para consulta e fins informativos. Ao utilizar o portfólio, você se compromete a:",
     "terms.section1.item1":
-      "Não utilizar o site de forma que possa danificá-lo ou prejudicar sua disponibilidade",
-    "terms.section1.item2": "Não tentar acessar áreas restritas do site sem autorização",
-    "terms.section1.item3": "Não usar o site para fins ilegais ou não autorizados",
-    "terms.section2": "2. Propriedade Intelectual",
+      "Não comprometer a segurança, a integridade ou a disponibilidade do site.",
+    "terms.section1.item2":
+      "Não tentar obter acesso não autorizado a sistemas ou recursos relacionados.",
+    "terms.section1.item3":
+      "Respeitar os direitos autorais e as licenças aplicáveis aos projetos apresentados.",
+    "terms.section2": "2. Propriedade Intelectual e Licenças",
     "terms.section2.desc1":
-      "Todo o conteúdo presente neste site, incluindo, mas não limitado a, textos, gráficos, logotipos, ícones, imagens, áudios, vídeos e software, é de propriedade exclusiva de Renan Braga ou de seus fornecedores de conteúdo e está protegido por leis de direitos autorais.",
+      "O código-fonte do projeto Portfolio Web está disponível publicamente no GitHub sob a licença MIT, conforme o arquivo LICENSE do repositório. Essa licença permite o uso, a modificação e a distribuição do software, desde que suas condições sejam respeitadas.",
     "terms.section2.desc2":
-      "Você não pode modificar, reproduzir, distribuir, transmitir, exibir, publicar, licenciar, criar trabalhos derivados, transferir ou vender qualquer material deste site sem autorização prévia por escrito.",
+      "A licença MIT do projeto não se estende automaticamente a conteúdos de terceiros, marcas, imagens, dados ou outros materiais sujeitos a direitos próprios. A utilização desses elementos deve respeitar as respectivas licenças e autorizações.",
     "terms.section3": "3. Limitação de Responsabilidade",
     "terms.section3.desc":
-      'O conteúdo deste site é fornecido "como está", sem qualquer garantia, expressa ou implícita. Em nenhuma circunstância, Renan Braga será responsável por quaisquer danos diretos, indiretos, incidentais, especiais ou consequenciais decorrentes do uso ou da impossibilidade de uso deste site.',
-    "terms.section4": "4. Links para Sites de Terceiros",
+      "As informações e os projetos são apresentados para fins profissionais, educacionais e demonstrativos. O conteúdo é disponibilizado no estado em que se encontra, sem garantia de precisão, disponibilidade contínua ou adequação a uma finalidade específica. Eventuais limitações de responsabilidade estão sujeitas à legislação aplicável.",
+    "terms.section4": "4. Links e Serviços de Terceiros",
     "terms.section4.desc":
-      "Este site pode conter links para sites de terceiros. Esses links são fornecidos apenas para conveniência do usuário. Renan Braga não possui controle sobre o conteúdo desses sites e não se responsabiliza por qualquer conteúdo, política de privacidade ou práticas de sites de terceiros.",
-    "terms.section5": "5. Modificações dos Termos",
+      "O portfólio pode conter links para GitHub, LinkedIn e outros serviços externos. Esses serviços possuem políticas e condições próprias. Não controlo seu conteúdo, funcionamento ou disponibilidade, sendo recomendável consultar os respectivos termos antes de utilizá-los.",
+    "terms.section5": "5. Atualizações dos Termos",
     "terms.section5.desc":
-      "Reservo-me o direito de modificar estes Termos de Uso a qualquer momento. As alterações entrarão em vigor assim que forem publicadas no site. O uso continuado do site após tais alterações constitui sua aceitação dos novos Termos de Uso.",
+      "Estes Termos de Uso poderão ser atualizados para refletir alterações no portfólio, em seus recursos ou nas condições aplicáveis. A versão vigente será disponibilizada nesta página com sua respectiva data de atualização.",
     "terms.section6": "6. Contato",
     "terms.section6.desc":
-      "Se você tiver dúvidas sobre estes Termos de Uso, entre em contato comigo através dos canais disponíveis na página de Contato.",
-    // Problem component
-    "problem.quote": '"Tecnocracia não é o problema, dados brutos são."',
-    "problem.desc":
-      "Gestores públicos e privados enfrentam um mar de dados descentralizados e mal documentados. Construir projetos estruturados com base em dados exige tempo, técnica e integração.",
-    "problem.solution": "O Professional Analyst resolve isso.",
-    // How It Works component
-    "howitworks.title": "Como o assistente funciona:",
-    "howitworks.step1.title": "Você faz uma pergunta",
-    "howitworks.step1.desc": '"Qual o número de escolas em Maringá?"',
-    "howitworks.step2.title": "O sistema detecta a cidade e tema",
-    "howitworks.step2.desc": "Identificação inteligente de entidades e contexto",
-    "howitworks.step3.title": "Acessa dados confiáveis",
-    "howitworks.step3.desc": "Bancos de dados profissionais e outras fontes confiáveis",
-    "howitworks.step4.title": "Usa uma LLM para interpretar",
-    "howitworks.step4.desc": "Processamento e contextualização dos dados relevantes",
-    "howitworks.step5.title": "Você recebe uma resposta clara",
-    "howitworks.step5.desc": "Com contexto, fontes e possíveis insights",
-    // About component
-    "about.title": "Quem criou isso?",
-    "about.name": "Renan Braga",
-    "about.desc":
-      "Sou um resolvedor de problemas. Uso dados, IA e automação para criar soluções que poupam tempo, reduzem custos e ampliam impacto. Acredito que tecnologia boa é aquela que funciona, escala e melhora a vida real.",
-    "about.tagline": "Tecnologia aplicada com propósito, velocidade e impacto.",
-    // TryNow component
-    "trynow.title": "Experimente a IA em ação",
-    "trynow.desc":
-      "Faça perguntas sobre dados públicos e receba respostas claras e contextualizadas.",
-    "trynow.button": "Acessar o Chatbot",
-    "trynow.tip":
-      'Funciona melhor em perguntas específicas, como: "Quantas escolas públicas há em Montes Claros?"',
+      "Para dúvidas sobre estes Termos de Uso, utilize a página de Contato ou envie uma mensagem para renanmbraga@outlook.com.",
+    "contact.captcha.local":
+      "A verificação hCaptcha está desativada no ambiente local. O formulário poderá ser testado no site publicado.",
     // ProjectsGrid
     "projects.title": "Meus Projetos",
-    "projects.viewDetails": "Detalhes",
     // Portfolio
     "projects.PortfolioWeb.title": "Portfólio Profissional",
     "projects.PortfolioWeb.desc":
       "Design, desenvolvimento e conteúdo deste portfólio pessoal. Implementado com React, Vite, Tailwind, i18n, SEO dinâmico e deploy otimizado via Vercel.",
-    // Chatbot
-    "projects.Chatbot.title": "EI DataBot",
-    "projects.Chatbot.desc":
-      "Plataforma de dados educacionais brasileiros com ETL em Polars, arquitetura Medallion, modelagem dimensional e PostgreSQL. Backend, dashboards e IA/RAG em evolucao.",
-    // Football Science
-    "projects.FootballScience.title": "Football Science",
-    "projects.FootballScience.desc":
-      "Ciência de dados aplicada ao futebol. Analisa dados financeiros e esportivos dos clubes da Série A com scraping, dashboards e Machine Learning.",
     // Skills
     "skills.title": "Competências Técnicas",
     "skills.section.etl": "Dados & ETL",
@@ -171,50 +148,12 @@ const translations = {
     "skills.list.aiTechniques": "Prompt Engineering, Embeddings",
     "skills.list.db": "PostgreSQL (JSONB, pgvector)",
     "skills.list.infra": "Docker, Git",
-    "skills.list.web": "FastAPI, React, TypeScript, JavaScript",
-    // Project pages common
-    "projects.back": "Voltar para a Home",
-    "projects.problem": "O Problema",
-    "projects.howitworks": "Como Funciona",
-    "projects.technologies": "Tecnologias",
-    "projects.openSource": "Projeto Open-Source",
-    "projects.openSource.desc": "Contribua para o desenvolvimento deste projeto para todos.",
-    "projects.contribute": "Contribuir no GitHub",
-    "projects.viewDemo": "Visitar Demo",
-    "projects.viewGithub": "Ver no GitHub",
-    // Professional Analyst Page
-    "projects.ProfessionalAnalyst.title": "Analista Profissional",
-    "projects.ProfessionalAnalyst.subtitle":
-      "Chatbot inteligente que transforma dados em respostas interpretadas para apoiar decisões estratégicas em projetos.",
-    "projects.ProfessionalAnalyst.problem1":
-      "Milhares de gestores precisam tomar decisões baseadas em dados, mas enfrentam uma avalanche de informações descentralizadas e mal estruturadas.",
-    "projects.ProfessionalAnalyst.problem2":
-      "Planilhas complexas e pouco acessíveis a quem precisa tomar decisões rápidas. O Professional Analyst resolve isso.",
-    "projects.ProfessionalAnalyst.how1": 'Você pergunta (ex: "Quantas escolas há em São Gonçalo?")',
-    "projects.ProfessionalAnalyst.how2": "O sistema detecta automaticamente a cidade e o tema",
-    "projects.ProfessionalAnalyst.how3":
-      "Busca dados confiáveis no banco de dados e outras fontes confiáveis.",
-    "projects.ProfessionalAnalyst.how4":
-      "Gera uma resposta explicativa com uma LLM (Groq + Langchain)",
-    "projects.ProfessionalAnalyst.how5": "Exibe os dados interpretados com fontes confiáveis",
-    // Football Science Page
-    "projects.FootballScience.subtitle":
-      "Plataforma profissional de análise estratégica sobre como investimentos e gestão financeira impactam o desempenho esportivo dos clubes da Série A do Brasileirão nos últimos 10 anos.",
-    "projects.FootballScience.problem1":
-      "Clubes de futebol enfrentam dificuldades para equilibrar performance esportiva e saúde financeira. Muitos gastam alto com retorno técnico limitado.",
-    "projects.FootballScience.problem2":
-      "Este projeto analisa indicadores financeiros, dívidas, contratações e resultados em campo para revelar padrões e auxiliar uma gestão mais eficiente e estratégica.",
-    "projects.FootballScience.how1": "Coleta de dados",
-    "projects.FootballScience.how2": "Limpeza e padronização dos dados com Python",
-    "projects.FootballScience.how3": "Dashboards dinâmicos com Streamlit e ECharts"
+    "skills.list.web": "FastAPI, React, TypeScript, JavaScript"
   },
   en: {
     // SEO
     "seo.title": "Renan Braga • Portfolio",
     "seo.description": "Professional portfolio of Renan Braga - Data Analyst.",
-    "seo.ogTitle": "Renan Braga • Portfolio",
-    "seo.ogDescription": "Professional portfolio of Renan Braga - Data Analyst.",
-    "seo.locale": "en_US",
     // Navbar
     contact: "Contact",
     github: "GitHub",
@@ -233,12 +172,6 @@ const translations = {
     "contact.title": "Get in Touch",
     "contact.subtitle":
       "I’m available for new projects, collaborations, and opportunities. Happy to talk about how I can help.",
-    "contact.infoTitle": "Contact Information",
-    "contact.email": "E-mail",
-    "contact.phone": "Phone",
-    "contact.location": "Location",
-    "contact.location.adress": "Volta Redonda - RJ, Brazil",
-    "contact.social": "Social Media",
     "contact.form.title": "Send a Message",
     "contact.form.name": "Name",
     "contact.form.namePlaceholder": "Your name",
@@ -247,111 +180,94 @@ const translations = {
     "contact.form.message": "Message",
     "contact.form.messagePlaceholder": "Your message here...",
     "contact.form.submit": "Send Message",
+    "contact.form.submitting": "Sending...",
+    "contact.form.success": "Message sent successfully. Thank you for reaching out!",
+    "contact.form.error":
+      "Unable to confirm submission. Check your connection, complete the CAPTCHA again, and try once more.",
+    "contact.captcha.unavailable":
+      "Form unavailable: CAPTCHA is not configured in this environment.",
+    "contact.captcha.error":
+      "Unable to load the security verification. Form submission is unavailable in this environment.",
     // Privacy Policy
     "privacy.title": "Privacy Policy",
-    "privacy.updated": "Last updated: June 2024",
-    "privacy.section1": "1. Information We Collect",
+    "privacy.updated": "Last updated: November 21, 2026",
+    "privacy.section1": "1. Information Processed",
     "privacy.section1.desc":
-      "When using our website, we may collect certain types of information, including:",
+      "This portfolio provides navigation and contact features. Depending on your interactions, the following information may be processed:",
     "privacy.section1.item1":
-      "Basic usage information, such as pages visited and time spent on the site",
-    "privacy.section1.item2": "Contact information that you voluntarily provide to us",
-    "privacy.section1.item3": "Cookies and similar technologies to improve your experience",
-    "privacy.section2": "2. How We Use Your Information",
-    "privacy.section2.desc": "We use the collected information to:",
-    "privacy.section2.item1": "Provide, maintain, and improve our website",
-    "privacy.section2.item2": "Respond to your requests and communications",
-    "privacy.section2.item3": "Analyze how users interact with our website",
-    "privacy.section2.item4": "Protect against fraudulent or abusive activities",
-    "privacy.section3": "3. Information Sharing",
+      "Language and theme preferences stored locally in your browser (localStorage).",
+    "privacy.section1.item2":
+      "UTM parameters, landing page, referral source, and visit timestamp stored during the session (sessionStorage).",
+    "privacy.section1.item3":
+      "Name, email address, message, and information required for spam verification when using the contact form.",
+    "privacy.section2": "2. Purposes of Processing",
+    "privacy.section2.desc": "Information is used to:",
+    "privacy.section2.item1": "Maintain your language and appearance preferences.",
+    "privacy.section2.item2": "Receive and respond to messages submitted through the contact form.",
+    "privacy.section2.item3": "Identify contact sources using UTM parameters when available.",
+    "privacy.section2.item4": "Reduce automated submissions, abuse, and spam.",
+    "privacy.section3": "3. External Services",
     "privacy.section3.desc":
-      "We do not sell your professional information. We may share information in limited circumstances:",
-    "privacy.section3.item1": "With service providers who assist us in operating the website",
-    "privacy.section3.item2": "To comply with legal obligations",
-    "privacy.section3.item3": "To protect rights, property, or safety",
-    "privacy.section4": "4. Your Rights",
+      "This portfolio uses external services that may process information required for its features:",
+    "privacy.section3.item1": "Vercel: website hosting and technical processing of requests.",
+    "privacy.section3.item2":
+      "Formspree: processing contact messages and attribution data submitted through the form.",
+    "privacy.section3.item3":
+      "hCaptcha: spam verification, with data processing governed by its own privacy policy.",
+    "privacy.section4": "4. Your Rights and Choices",
     "privacy.section4.desc":
-      "Depending on your location, you may have specific rights regarding your data, including:",
-    "privacy.section4.item1": "Accessing the data we have about you",
-    "privacy.section4.item2": "Correcting inaccurate data",
-    "privacy.section4.item3": "Deleting your data under certain circumstances",
-    "privacy.section4.item4": "Restricting or objecting to certain data processing",
-    "privacy.section5": "5. Contact",
+      "Under applicable legislation, including Brazil's LGPD, you may request:",
+    "privacy.section4.item1": "Confirmation of data processing and access to your personal data.",
+    "privacy.section4.item2": "Correction of incomplete, inaccurate, or outdated information.",
+    "privacy.section4.item3":
+      "Anonymization, blocking, or deletion of data where legally applicable.",
+    "privacy.section4.item4":
+      "Withdrawal of consent, where applicable, and information about personal data processing.",
+    "privacy.analytics.title": "Google Analytics 4",
+    "privacy.analytics.desc":
+      "We use Google Analytics 4 to understand portfolio navigation, including visited pages, traffic sources, and contact form interactions. Analytics data collection occurs only after your explicit consent. We do not send names, email addresses, or message contents to Google Analytics.",
+    "privacy.analytics.consent":
+      "You can accept, decline, or change your preference at any time using the Privacy preferences link in the footer. Declining does not affect your ability to use the website. Revoking consent stops new analytics transmissions but does not automatically delete previously collected data.",
+    "privacy.section5": "5. Contact and Updates",
     "privacy.section5.desc":
-      "If you have questions about this Privacy Policy, please contact me through the channels available on the Contact page.",
+      "For questions or requests regarding your personal data, use the Contact page or email renanmbraga@outlook.com. This policy may be updated when portfolio features change.",
     // Terms of Use
     "terms.title": "Terms of Use",
-    "terms.updated": "Last updated: June 2024",
+    "terms.updated": "Last updated: November 21, 2026",
     "terms.intro":
-      "By accessing and using this website, you agree to the following Terms of Use. Please read them carefully.",
+      "This portfolio presents professional information, technical skills, and development projects. By using the website, you must comply with applicable laws and the conditions described in these terms.",
     "terms.section1": "1. Use of the Website",
     "terms.section1.desc":
-      "The content of this website is provided for informational purposes only. By using this website, you agree to:",
-    "terms.section1.item1": "Not use the site in a way that may damage or impair its availability",
-    "terms.section1.item2":
-      "Not attempt to access restricted areas of the site without authorization",
-    "terms.section1.item3": "Not use the site for illegal or unauthorized purposes",
-    "terms.section2": "2. Intellectual Property",
+      "The content is available for consultation and informational purposes. When using this portfolio, you agree to:",
+    "terms.section1.item1":
+      "Not compromise the security, integrity, or availability of the website.",
+    "terms.section1.item2": "Not attempt unauthorized access to related systems or resources.",
+    "terms.section1.item3": "Respect copyright and applicable licenses for the projects presented.",
+    "terms.section2": "2. Intellectual Property and Licenses",
     "terms.section2.desc1":
-      "All content on this site, including but not limited to text, graphics, logos, icons, images, audio, video, and software, is the exclusive property of Renan Braga or its content suppliers and is protected by copyright laws.",
+      "The Portfolio Web source code is publicly available on GitHub under the MIT License, as specified in the repository's LICENSE file. This license permits the use, modification, and distribution of the software, provided its conditions are respected.",
     "terms.section2.desc2":
-      "You may not modify, reproduce, distribute, transmit, display, publish, license, create derivative works, transfer, or sell any material from this site without prior written authorization.",
+      "The project's MIT License does not automatically extend to third-party content, trademarks, images, data, or other materials subject to separate rights. Their use must comply with the respective licenses and permissions.",
     "terms.section3": "3. Limitation of Liability",
     "terms.section3.desc":
-      'The content of this site is provided "as is" without any warranty, express or implied. Under no circumstances will Renan Braga be liable for any direct, indirect, incidental, special, or consequential damages arising from the use or inability to use this site.',
-    "terms.section4": "4. Links to Third-Party Sites",
+      "Information and projects are presented for professional, educational, and demonstration purposes. Content is provided as is, without guarantees of accuracy, continuous availability, or fitness for a particular purpose. Any limitations of liability are subject to applicable law.",
+    "terms.section4": "4. Third-Party Links and Services",
     "terms.section4.desc":
-      "This site may contain links to third-party websites. These links are provided solely for the convenience of the user. Renan Braga has no control over the content of these sites and is not responsible for any content, privacy policy, or practices of third-party sites.",
-    "terms.section5": "5. Modifications to Terms",
+      "This portfolio may contain links to GitHub, LinkedIn, and other external services. These services have their own policies and conditions. I do not control their content, operation, or availability. Reviewing their respective terms before using them is recommended.",
+    "terms.section5": "5. Updates to These Terms",
     "terms.section5.desc":
-      "I reserve the right to modify these Terms of Use at any time. The changes will take effect as soon as they are published on the site. Continued use of the site after such changes constitutes your acceptance of the new Terms of Use.",
+      "These Terms of Use may be updated to reflect changes to the portfolio, its features, or applicable conditions. The current version will be published on this page with its corresponding update date.",
     "terms.section6": "6. Contact",
     "terms.section6.desc":
-      "If you have questions about these Terms of Use, please contact me through the channels available on the Contact page.",
-    // Problem component
-    "problem.quote": '"Technocracy isn\'t the problem, raw data is."',
-    "problem.desc":
-      "Public and private managers face a sea of decentralized and poorly documented data. Building structured projects based on data requires time, technique, and integration.",
-    "problem.solution": "Professional Analyst solves this.",
-    // How It Works component
-    "howitworks.title": "How the assistant works:",
-    "howitworks.step1.title": "You ask a question",
-    "howitworks.step1.desc": '"What\'s the number of schools in Maringá?"',
-    "howitworks.step2.title": "The system detects the city and topic",
-    "howitworks.step2.desc": "Intelligent entity and context identification",
-    "howitworks.step3.title": "Accesses reliable data",
-    "howitworks.step3.desc": "Professional databases and other trusted sources",
-    "howitworks.step4.title": "Uses an LLM to interpret",
-    "howitworks.step4.desc": "Processing and contextualizing relevant data",
-    "howitworks.step5.title": "You receive a clear answer",
-    "howitworks.step5.desc": "With context, sources, and possible insights",
-    // About component
-    "about.title": "Who created this?",
-    "about.name": "Renan Braga",
-    "about.desc":
-      "I'm a problem solver. I use data, AI, and automation to build solutions that save time, cut costs, and increase impact. I believe good technology is the kind that works, scales, and improves real life.",
-    "about.tagline": "Technology applied with purpose, speed, and impact.",
-    // TryNow component
-    "trynow.title": "Experience AI in action",
-    "trynow.desc": "Ask questions about public data and receive clear, contextualized answers.",
-    "trynow.button": "Access the Chatbot",
-    "trynow.tip":
-      'Works best with specific questions, such as: "How many public schools are there in Montes Claros?"',
+      "For questions regarding these Terms of Use, use the Contact page or send a message to renanmbraga@outlook.com.",
+    "contact.captcha.local":
+      "hCaptcha verification is disabled in the local environment. The form can be tested on the published website.",
     // ProjectsGrid
     "projects.title": "My Projects",
-    "projects.viewDetails": "Detalhes",
     // Portfolio
     "projects.PortfolioWeb.title": "Professional Portfolio",
     "projects.PortfolioWeb.desc":
       "Design, development, and content of this personal portfolio. Built with React, Vite, Tailwind, i18n, dynamic SEO, and optimized Vercel deployment.",
-    // Chatbot
-    "projects.Chatbot.title": "EI DataBot",
-    "projects.Chatbot.desc":
-      "Brazilian educational data platform using Polars ETL, Medallion architecture, dimensional modeling and PostgreSQL. Backend, dashboards and AI/RAG are under development.",
-    // Football Science
-    "projects.FootballScience.title": "Football Science",
-    "projects.FootballScience.desc":
-      "Data science applied to football. Analyzes financial and performance data of Brazilian top league clubs using scraping, dashboards, and Machine Learning.",
     // Skills
     "skills.title": "Technical Skills",
     "skills.section.etl": "Data & ETL",
@@ -370,42 +286,7 @@ const translations = {
     "skills.list.aiTechniques": "Prompt Engineering, Embeddings",
     "skills.list.db": "PostgreSQL (JSONB, pgvector)",
     "skills.list.infra": "Docker, Git",
-    "skills.list.web": "FastAPI, React, TypeScript, JavaScript",
-    // Project pages common
-    "projects.back": "Back to Home",
-    "projects.problem": "The Problem",
-    "projects.howitworks": "How It Works",
-    "projects.technologies": "Technologies",
-    "projects.openSource": "Open Source Project",
-    "projects.openSource.desc": "Contribute to the development of this project for everyone.",
-    "projects.contribute": "Contribute on GitHub",
-    "projects.viewDemo": "Visit Demo",
-    "projects.viewGithub": "View on GitHub",
-    // Professional Analyst Insight Page
-    "projects.ProfessionalAnalyst.title": "Professional Analyst",
-    "projects.ProfessionalAnalyst.subtitle":
-      "Intelligent chatbot that transforms data into interpreted answers to support strategic decisions.",
-    "projects.ProfessionalAnalyst.problem1":
-      "Thousands of managers need to make data-based decisions but face an avalanche of decentralized and poorly structured information.",
-    "projects.ProfessionalAnalyst.problem2":
-      "Spreadsheets and tables are technical, complex, and inaccessible to those who need to decide quickly. Professional Analyst solves this.",
-    "projects.ProfessionalAnalyst.how1":
-      'You ask (e.g., "How many schools are there in São Gonçalo?")',
-    "projects.ProfessionalAnalyst.how2": "The system automatically detects the city and topic",
-    "projects.ProfessionalAnalyst.how3": "Fetches real data from the database",
-    "projects.ProfessionalAnalyst.how4":
-      "Generates an explanatory answer using an LLM (Groq + Langchain)",
-    "projects.ProfessionalAnalyst.how5": "Displays interpreted data with reliable sources",
-    // Football Science Page
-    "projects.FootballScience.subtitle":
-      "Professional strategic analysis platform on how investments and financial management impact the sports performance of Série A clubs in the last 10 years.",
-    "projects.FootballScience.problem1":
-      "Football clubs struggle to balance sports performance and financial health. Many spend heavily with limited technical returns.",
-    "projects.FootballScience.problem2":
-      "This project analyzes financial indicators, debts, signings, and match results to uncover patterns and support more strategic management.",
-    "projects.FootballScience.how1": "Data collection",
-    "projects.FootballScience.how2": "Data cleaning and standardization with Python",
-    "projects.FootballScience.how3": "Dynamic dashboards with Streamlit and ECharts"
+    "skills.list.web": "FastAPI, React, TypeScript, JavaScript"
   }
 };
 

@@ -59,8 +59,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
     headline: "Dados educacionais transformados em análises e consultas inteligentes",
     introduction:
       "O EI DataBot integra bases públicas brasileiras, principalmente do INEP e do IBGE/SIDRA, em um fluxo de engenharia de dados que organiza, transforma, modela e disponibiliza indicadores educacionais. A solução reúne dashboards analíticos, API e recursos conversacionais de IA.",
-    note:
-      "Projeto em versão Alpha, voltado ao desenvolvimento e à validação técnica. Os números destacados refletem uma execução validada; a aplicação não é anunciada como serviço público em produção.",
+    note: "Projeto em versão Alpha, voltado ao desenvolvimento e à validação técnica. Os números destacados refletem uma execução validada; a aplicação não é anunciada como serviço público em produção.",
     back: "Voltar ao portfólio",
     github: "Código no GitHub",
     release: "Código da Alpha 1",
@@ -132,9 +131,24 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
       "IBGE / SIDRA: referências territoriais e indicadores complementares"
     ],
     technologies: [
-      "Python 3.13", "Polars", "Parquet", "PostgreSQL 17", "SQL", "pgvector",
-      "JSONB", "FastAPI", "Gemini", "RAG", "HTML", "CSS", "JavaScript",
-      "React", "TypeScript", "Vite", "Docker Compose", "Ruff"
+      "Python 3.13",
+      "Polars",
+      "Parquet",
+      "PostgreSQL 17",
+      "SQL",
+      "pgvector",
+      "JSONB",
+      "FastAPI",
+      "Gemini",
+      "RAG",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Docker Compose",
+      "Ruff"
     ],
     roadmap: [
       "Concluir revisões humanas dos documentos do RAG e verificar a sincronização dos embeddings.",
@@ -152,8 +166,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
     headline: "Turning education datasets into analytics and intelligent queries",
     introduction:
       "EI DataBot brings together Brazilian public datasets, primarily from INEP and IBGE/SIDRA, in a data engineering workflow that organizes, transforms, models, and serves education indicators. The solution includes analytical dashboards, an API, and conversational AI capabilities.",
-    note:
-      "An Alpha-stage project focused on development and technical validation. Featured numbers come from a validated pipeline run; the application is not presented as a publicly deployed production service.",
+    note: "An Alpha-stage project focused on development and technical validation. Featured numbers come from a validated pipeline run; the application is not presented as a publicly deployed production service.",
     back: "Back to portfolio",
     github: "Source code on GitHub",
     release: "Alpha 1 source",
@@ -225,9 +238,24 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
       "IBGE / SIDRA: geographic references and supplementary indicators"
     ],
     technologies: [
-      "Python 3.13", "Polars", "Parquet", "PostgreSQL 17", "SQL", "pgvector",
-      "JSONB", "FastAPI", "Gemini", "RAG", "HTML", "CSS", "JavaScript",
-      "React", "TypeScript", "Vite", "Docker Compose", "Ruff"
+      "Python 3.13",
+      "Polars",
+      "Parquet",
+      "PostgreSQL 17",
+      "SQL",
+      "pgvector",
+      "JSONB",
+      "FastAPI",
+      "Gemini",
+      "RAG",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Docker Compose",
+      "Ruff"
     ],
     roadmap: [
       "Finish human review of RAG documents and verify embedding synchronization.",

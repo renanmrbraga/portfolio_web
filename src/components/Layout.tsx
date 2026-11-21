@@ -1,20 +1,21 @@
-// src/components/Layout.tsx
-import { ReactNode } from "react";
-import { Helmet } from "react-helmet-async";
-import { Seo } from "./Seo";
-import { useLanguage } from "./useLanguage";
+import type { ReactNode } from "react";
+
+import { Seo } from "@/components/Seo";
 
 type LayoutProps = {
   children: ReactNode;
 };
 
+/**
+ * Layout compartilhado entre as páginas.
+ *
+ * Centraliza o SEO e mantém a estrutura principal.
+ */
 export function Layout({ children }: LayoutProps) {
-  const { t } = useLanguage();
-
   return (
     <>
-      <Helmet htmlAttributes={{ lang: t("seo.locale") === "pt_BR" ? "pt" : "en" }} />
       <Seo />
+
       <main className="pt-20">{children}</main>
     </>
   );

@@ -9,7 +9,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { Layout } from "@/components/Layout";
+import { AnalyticsConsent } from "@/components/AnalyticsConsent";
 import { AttributionTracker } from "@/components/AttributionTracker";
+import { GoogleAnalyticsManager } from "@/components/GoogleAnalyticsManager";
 
 import Index from "./pages/Index";
 
@@ -30,6 +32,8 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <AttributionTracker />
+            <GoogleAnalyticsManager />
+            <AnalyticsConsent />
             <Suspense
               fallback={
                 <div role="status" aria-live="polite" className="py-20 text-center">

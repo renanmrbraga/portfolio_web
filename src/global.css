@@ -144,7 +144,6 @@
   @apply bg-white border-gray-200 shadow-sm;
 }
 
-
 /* Animacao de entrada dos cards de projetos. */
 .project-card-enter {
   opacity: 0;

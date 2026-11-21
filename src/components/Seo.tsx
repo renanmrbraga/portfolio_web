@@ -1,36 +1,66 @@
-// src/components/Seo.tsx
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
+
 import { useLanguage } from "@/components/useLanguage";
+import { getPageMetadata } from "@/lib/page-metadata";
 
+const SITE_URL = "https://renanmrbraga.vercel.app";
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
+/**
+ * Gerencia os metadados de todas as páginas.
+ *
+ * O endereço canônico não inclui UTMs nem fragmentos.
+ * Páginas inexistentes recebem a diretiva noindex.
+ */
 export function Seo() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const { pathname } = useLocation();
 
-  const canonical = "https://renanmrbraga.vercel.app";
-  const ogImage = `${canonical}/og-image.png`;
+  const isPt = language !== "en";
 
-  const lang = t("seo.locale") === "pt_BR" ? "pt" : "en";
+  // Normaliza barras finais.
+  const path = pathname.replace(/\/+$/, "") || "/";
+
+  const metadata = getPageMetadata(path, isPt, t);
+
+  const canonical = `${SITE_URL}${path}`;
 
   return (
-    <Helmet htmlAttributes={{ lang }}>
-      <title>{t("seo.title")}</title>
-      <meta name="description" content={t("seo.description")} />
+    <Helmet htmlAttributes={{ lang: isPt ? "pt-BR" : "en" }}>
+      <title>{metadata.title}</title>
+
+      <meta name="description" content={metadata.description} />
+
       <meta name="author" content="Renan Braga" />
-      <link rel="canonical" href={canonical} />
+
+      <meta name="robots" content={metadata.indexable ? "index, follow" : "noindex, follow"} />
+
+      {metadata.indexable && <link rel="canonical" href={canonical} />}
 
       {/* Open Graph */}
-      <meta property="og:title" content={t("seo.ogTitle")} />
-      <meta property="og:description" content={t("seo.ogDescription")} />
+      <meta property="og:title" content={metadata.title} />
+
+      <meta property="og:description" content={metadata.description} />
+
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={canonical} />
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:locale" content={t("seo.locale")} />
+
+      {metadata.indexable && <meta property="og:url" content={canonical} />}
+
+      <meta property="og:image" content={OG_IMAGE} />
+
+      <meta property="og:locale" content={isPt ? "pt_BR" : "en_US"} />
+
       <meta property="og:site_name" content="Renan Braga" />
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={t("seo.ogTitle")} />
-      <meta name="twitter:description" content={t("seo.ogDescription")} />
-      <meta name="twitter:image" content={ogImage} />
+
+      <meta name="twitter:title" content={metadata.title} />
+
+      <meta name="twitter:description" content={metadata.description} />
+
+      <meta name="twitter:image" content={OG_IMAGE} />
       <meta name="twitter:creator" content="@renanmrbraga" />
     </Helmet>
   );

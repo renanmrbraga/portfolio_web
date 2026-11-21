@@ -12,15 +12,22 @@ const Navbar = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
+    /**
+     * Atualiza o estilo do cabeçalho conforme a rolagem.
+     * React ignora atualizações quando o valor não muda.
+     */
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    // Verifica a posição inicial, inclusive após recarregar.
+    handleScroll();
+
+    // Passive informa que o listener não cancela a rolagem.
+    window.addEventListener("scroll", handleScroll, {
+      passive: true
+    });
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -89,7 +96,11 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              type="button"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-label="Menu de navegação"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
               className="dark:text-gray-300 text-gray-800"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -99,30 +110,33 @@ const Navbar = () => {
       </div>
 
       {/* Mobile navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden dark:bg-[#0F1A24]/95 dark:backdrop-blur-md dark:border-t dark:border-gray-800 bg-white/95 backdrop-blur-md border-t border-gray-200">
-          <nav className="flex flex-col px-4 py-6 space-y-4">
-            <div className="flex flex-col space-y-3 pt-4">
-              <Button
-                variant="outline"
-                className="dark:border-gray-700 dark:text-gray-300 border-gray-300 text-gray-800 w-full"
-                asChild
-              >
-                <a href="https://github.com/renanmrbraga" target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-2 h-4 w-4" />
-                  GitHub
-                </a>
-              </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full" asChild>
-                <Link to="/contact">
-                  <User className="mr-2 h-4 w-4" />
-                  {t("contact")}
-                </Link>
-              </Button>
-            </div>
-          </nav>
-        </div>
-      )}
+      <div
+        id="mobile-navigation"
+        className={`md:hidden dark:bg-[#0F1A24]/95 dark:backdrop-blur-md dark:border-t dark:border-gray-800 bg-white/95 backdrop-blur-md border-t border-gray-200 ${
+          mobileMenuOpen ? "block" : "hidden"
+        }`}
+      >
+        <nav className="flex flex-col px-4 py-6 space-y-4">
+          <div className="flex flex-col space-y-3 pt-4">
+            <Button
+              variant="outline"
+              className="dark:border-gray-700 dark:text-gray-300 border-gray-300 text-gray-800 w-full"
+              asChild
+            >
+              <a href="https://github.com/renanmrbraga" target="_blank" rel="noopener noreferrer">
+                <Github className="mr-2 h-4 w-4" />
+                GitHub
+              </a>
+            </Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full" asChild>
+              <Link to="/contact">
+                <User className="mr-2 h-4 w-4" />
+                {t("contact")}
+              </Link>
+            </Button>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };

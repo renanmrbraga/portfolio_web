@@ -6,6 +6,9 @@ import { useLanguage } from "@/components/useLanguage";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const openAnalyticsPreferences = () => {
+    window.dispatchEvent(new Event("analytics-consent-open"));
+  };
 
   return (
     <footer className="py-10 border-t dark:border-gray-800 border-gray-200" id="contact">
@@ -15,6 +18,7 @@ const Footer = () => {
             href="https://github.com/renanmrbraga"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub de Renan Braga"
             className="dark:text-gray-400 text-gray-500 hover:text-purple-400 transition-colors"
           >
             <Github className="h-6 w-6" />
@@ -23,12 +27,14 @@ const Footer = () => {
             href="https://linkedin.com/in/renanmrbraga"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn de Renan Braga"
             className="dark:text-gray-400 text-gray-500 hover:text-purple-400 transition-colors"
           >
             <Linkedin className="h-6 w-6" />
           </a>
           <a
             href="mailto:renanmbraga@outlook.com"
+            aria-label="Enviar e-mail para Renan Braga"
             className="dark:text-gray-400 text-gray-500 hover:text-purple-400 transition-colors"
           >
             <Mail className="h-6 w-6" />
@@ -52,6 +58,16 @@ const Footer = () => {
           >
             {t("footer.terms")}
           </Link>
+          <span className="dark:text-gray-700 text-gray-400">•</span>
+          <button
+            type="button"
+            onClick={openAnalyticsPreferences}
+            className="dark:text-gray-500 text-gray-500 hover:text-purple-400 transition-colors"
+          >
+            {t("footer.privacy") === "Privacy Policy"
+              ? "Cookie preferences"
+              : "Preferências de privacidade"}
+          </button>
         </div>
       </div>
     </footer>

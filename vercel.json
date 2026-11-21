@@ -2,8 +2,24 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/projects/ei-databot",
+      "destination": "/_seo/ei-databot.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/_seo/contact.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/_seo/privacy-policy.html"
+    },
+    {
+      "source": "/terms-of-use",
+      "destination": "/_seo/terms-of-use.html"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/index.html"
     }
   ]
 }

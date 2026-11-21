@@ -3,10 +3,12 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Linkedin, Github, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/components/useLanguage";
 import { getAttribution } from "@/lib/attribution";
+import { trackGenerateLead } from "@/lib/google-analytics";
+import { CaptchaErrorBoundary } from "@/components/CaptchaErrorBoundary";
 
 const Contact = () => {
   const { t } = useLanguage();
@@ -19,7 +21,11 @@ const Contact = () => {
   const submittingRef = useRef(false);
   const captchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY?.trim();
   const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim();
-  const formAvailable = Boolean(captchaSiteKey && formspreeUrl);
+  // O hCaptcha não será inicializado no localhost durante o desenvolvimento.
+  const isLocalDevelopment =
+    import.meta.env.DEV && ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
+
+  const formAvailable = Boolean(captchaSiteKey && formspreeUrl && !isLocalDevelopment);
   const attribution = getAttribution();
 
   /**
@@ -60,6 +66,10 @@ const Contact = () => {
       if (!response.ok) {
         throw new Error(`Formspree HTTP ${response.status}`);
       }
+
+      // O Formspree confirmou o recebimento da mensagem.
+      // Registra a conversão somente se houver consentimento.
+      trackGenerateLead();
 
       // Limpa somente após confirmação do Formspree.
       form.reset();
@@ -102,60 +112,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 mb-16">
-          <div>
-            <h2 className="text-2xl font-bold mb-6">{t("contact.infoTitle")}</h2>
-
-            <div className="space-y-6">
-              <ContactItem
-                icon={<Mail className="h-5 w-5 text-blue-500" />}
-                title={t("contact.email")}
-              >
-                <a
-                  href="mailto:renanmbraga@outlook.com"
-                  className="hover:text-blue-500 transition-colors"
-                >
-                  renanmbraga@outlook.com
-                </a>
-              </ContactItem>
-
-              <ContactItem
-                icon={<MapPin className="h-5 w-5 text-blue-500" />}
-                title={t("contact.location")}
-              >
-                {t("contact.location.adress")}
-              </ContactItem>
-
-              <div className="pt-4">
-                <h3 className="font-medium mb-3 text-gray-800 dark:text-gray-200">
-                  {t("contact.social")}
-                </h3>
-                <div className="flex space-x-4">
-                  <Button variant="outline" size="icon" asChild>
-                    <a
-                      href="https://linkedin.com/in/renanmrbraga"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="icon" asChild>
-                    <a
-                      href="https://github.com/renanmrbraga"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub"
-                    >
-                      <Github className="h-5 w-5" />
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div className="max-w-2xl mx-auto mb-16">
           <div className="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl">
             <h2 className="text-2xl font-bold mb-6">{t("contact.form.title")}</h2>
 
@@ -244,20 +201,26 @@ const Contact = () => {
                 ></textarea>
               </div>
 
-              {/* hCaptcha */}
-              {captchaSiteKey ? (
-                <HCaptcha
-                  sitekey={captchaSiteKey}
-                  onVerify={setCaptchaToken}
-                  onExpire={() => setCaptchaToken("")}
-                  onError={() => setCaptchaToken("")}
-                  ref={captchaRef}
-                />
-              ) : (
-                <p role="status" className="text-sm text-amber-600 dark:text-amber-400">
-                  Formulario indisponivel: CAPTCHA nao configurado neste ambiente.
-                </p>
-              )}
+              {/* Protege a aplicação contra falhas do hCaptcha. */}
+              <CaptchaErrorBoundary fallbackMessage={t("contact.captcha.error")}>
+                {isLocalDevelopment ? (
+                  <p role="status" className="text-sm text-amber-600 dark:text-amber-400">
+                    {t("contact.captcha.local")}
+                  </p>
+                ) : captchaSiteKey ? (
+                  <HCaptcha
+                    sitekey={captchaSiteKey}
+                    onVerify={setCaptchaToken}
+                    onExpire={() => setCaptchaToken("")}
+                    onError={() => setCaptchaToken("")}
+                    ref={captchaRef}
+                  />
+                ) : (
+                  <p role="status" className="text-sm text-amber-600 dark:text-amber-400">
+                    {t("contact.captcha.unavailable")}
+                  </p>
+                )}
+              </CaptchaErrorBoundary>
 
               {/* Campo oculto para enviar o token ao backend/Formspree */}
               <input type="hidden" name="h-captcha-response" value={captchaToken} />
@@ -269,18 +232,17 @@ const Contact = () => {
                 }
                 className="w-full bg-blue-600 hover:bg-blue-700"
               >
-                {isSubmitting ? "Enviando..." : t("contact.form.submit")}
+                {isSubmitting ? t("contact.form.submitting") : t("contact.form.submit")}
               </Button>
               {submitStatus === "success" && (
                 <p role="status" className="text-sm text-green-600 dark:text-green-400">
-                  Mensagem enviada com sucesso. Obrigado pelo contato!
+                  {t("contact.form.success")}
                 </p>
               )}
 
               {submitStatus === "error" && (
                 <p role="alert" className="text-sm text-red-600 dark:text-red-400">
-                  Não foi possível confirmar o envio. Verifique sua conexão, resolva novamente o
-                  CAPTCHA e tente outra vez.
+                  {t("contact.form.error")}
                 </p>
               )}
             </form>
@@ -291,23 +253,5 @@ const Contact = () => {
     </div>
   );
 };
-
-const ContactItem = ({
-  icon,
-  title,
-  children
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-}) => (
-  <div className="flex">
-    <div className="mr-3">{icon}</div>
-    <div>
-      <h3 className="font-medium text-gray-800 dark:text-gray-200">{title}</h3>
-      <p className="text-gray-700 dark:text-gray-300">{children}</p>
-    </div>
-  </div>
-);
 
 export default Contact;

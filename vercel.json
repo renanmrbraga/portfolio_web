@@ -3,7 +3,7 @@
   "redirects": [
     {
       "source": "/linkedin",
-      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=portfolio&utm_content=perfil_contato",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=portfolio&utm_content=dados_contato",
       "permanent": false
     },
     {
@@ -13,7 +13,7 @@
     },
     {
       "source": "/github",
-      "destination": "/?utm_source=github&utm_medium=social&utm_campaign=portfolio",
+      "destination": "/?utm_source=github&utm_medium=social&utm_campaign=portfolio&utm_content=overview",
       "permanent": false
     }
   ],

@@ -1,11 +1,11 @@
 /**
  * Conteúdo bilíngue do projeto EI DataBot.
- * Indicadores representam uma execução validada da v0.1.0-alpha.1,
- * publicada em 03/11/2026. Não são métricas em tempo real.
+ * Indicadores representam execuções validadas até a v0.1.1,
+ * publicada em 22/11/2026. Não são métricas em tempo real.
  */
 
 export const EI_DATABOT_GITHUB = "https://github.com/renanmrbraga/ei_databot";
-export const EI_DATABOT_RELEASE = `${EI_DATABOT_GITHUB}/tree/v0.1.0-alpha.1`;
+export const EI_DATABOT_RELEASE = `${EI_DATABOT_GITHUB}/releases/tag/v0.1.1`;
 export const EI_DATABOT_PREVIEW = "/dashboards/mapa-enade.png";
 
 export type EIDataBotStatus = "implemented" | "evolving" | "planned";
@@ -53,16 +53,16 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
   pt: {
     title: "EI DataBot",
     category: "Engenharia de Dados · Analytics · IA Aplicada",
-    version: "v0.1.0-alpha.1 · 03/11/2026",
+    version: "v0.1.1 · 22/11/2026",
     cardDescription:
-      "Engenharia de dados educacionais com ETL em Python/Polars, PostgreSQL, modelagem dimensional, dashboards HTML e chatbot com Gemini e RAG. Alpha 1 validada com 2,7 milhões de registros Gold.",
+      "Projeto que reúne dados educacionais em pipelines Python/Polars, PostgreSQL e dashboards HTML. Inclui um chatbot com Gemini e RAG. Na v0.1.1, foram validados mais de 2,7 milhões de registros na camada Gold.",
     headline: "Dados educacionais transformados em análises e consultas inteligentes",
     introduction:
       "O EI DataBot integra bases públicas brasileiras, principalmente do INEP e do IBGE/SIDRA, em um fluxo de engenharia de dados que organiza, transforma, modela e disponibiliza indicadores educacionais. A solução reúne dashboards analíticos, API e recursos conversacionais de IA.",
     note: "Projeto em versão Alpha, voltado ao desenvolvimento e à validação técnica. Os números destacados refletem uma execução validada; a aplicação não é anunciada como serviço público em produção.",
     back: "Voltar ao portfólio",
     github: "Código no GitHub",
-    release: "Código da Alpha 1",
+    release: "Release v0.1.1",
     architectureTitle: "Arquitetura e componentes",
     technologiesTitle: "Tecnologias principais",
     sourcesTitle: "Fontes de dados",
@@ -79,7 +79,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
     implementedLabel: "Implementado",
     evolvingLabel: "Em evolução",
     plannedLabel: "Planejado",
-    statsTitle: "Resultados validados da Alpha 1",
+    statsTitle: "Resultados validados",
     stats: [
       { value: "2.702.972", label: "Registros em 10 tabelas Gold no PostgreSQL" },
       { value: "27/27", label: "Etapas concluídas na execução integral do ETL" },
@@ -108,7 +108,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
       {
         title: "API, chatbot e IA",
         description:
-          "Backend FastAPI integrado a serviços de análise, Google Gemini, RAG e persistência de sessões. A homologação funcional completa da integração permanece em evolução.",
+          "Backend FastAPI integrado a serviços de análise, Google Gemini, RAG e persistência de sessões. A integração funcional foi validada localmente; a ampliação dos indicadores permanece em evolução.",
         status: "evolving"
       },
       {
@@ -151,7 +151,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
       "Ruff"
     ],
     roadmap: [
-      "Concluir revisões humanas dos documentos do RAG e verificar a sincronização dos embeddings.",
+      "Concluir a revisão e aprovação dos documentos de negócio do RAG.",
       "Ampliar os testes de integração e a validação funcional do chatbot.",
       "Reforçar autenticação, autorização e segurança antes de qualquer exposição pública da aplicação.",
       "Evoluir os dashboards e acompanhar as dependências da versão Alpha."
@@ -160,16 +160,16 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
   en: {
     title: "EI DataBot",
     category: "Data Engineering · Analytics · Applied AI",
-    version: "v0.1.0-alpha.1 · Nov 3, 2026",
+    version: "v0.1.1 · Nov 22, 2026",
     cardDescription:
-      "Educational data engineering with Python/Polars ETL, PostgreSQL, dimensional modeling, HTML dashboards, and a Gemini/RAG chatbot. Alpha 1 validation covered 2.7 million Gold records.",
+      "A project that brings education data together through Python/Polars pipelines, PostgreSQL, and HTML dashboards. It also includes a Gemini and RAG chatbot. Version v0.1.1 validated over 2.7 million records in the Gold layer.",
     headline: "Turning education datasets into analytics and intelligent queries",
     introduction:
       "EI DataBot brings together Brazilian public datasets, primarily from INEP and IBGE/SIDRA, in a data engineering workflow that organizes, transforms, models, and serves education indicators. The solution includes analytical dashboards, an API, and conversational AI capabilities.",
     note: "An Alpha-stage project focused on development and technical validation. Featured numbers come from a validated pipeline run; the application is not presented as a publicly deployed production service.",
     back: "Back to portfolio",
     github: "Source code on GitHub",
-    release: "Alpha 1 source",
+    release: "Release v0.1.1",
     architectureTitle: "Architecture and components",
     technologiesTitle: "Core technologies",
     sourcesTitle: "Data sources",
@@ -186,7 +186,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
     implementedLabel: "Implemented",
     evolvingLabel: "Evolving",
     plannedLabel: "Planned",
-    statsTitle: "Alpha 1 validated results",
+    statsTitle: "Validated results",
     stats: [
       { value: "2,702,972", label: "Records in ten PostgreSQL Gold tables" },
       { value: "27/27", label: "Stages completed in the full ETL run" },
@@ -215,7 +215,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
       {
         title: "API, chatbot, and AI",
         description:
-          "FastAPI backend with analytical services, Google Gemini, RAG, and persistent sessions. Complete functional integration testing is still ongoing.",
+          "FastAPI backend with analytical services, Google Gemini, RAG, and persistent sessions. Local functional integration has been validated; indicator coverage remains limited.",
         status: "evolving"
       },
       {
@@ -258,7 +258,7 @@ export const eiDataBotCopy: Record<"pt" | "en", EIDataBotCopy> = {
       "Ruff"
     ],
     roadmap: [
-      "Finish human review of RAG documents and verify embedding synchronization.",
+      "Complete the review and approval of RAG business documents.",
       "Expand integration tests and full chatbot functional validation.",
       "Strengthen authentication, authorization, and security before any public application exposure.",
       "Improve dashboards and monitor Alpha-stage dependencies."

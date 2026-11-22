@@ -65,20 +65,20 @@ const pageCopy: Record<Language, EIDataBotContent> = {
     back: "Voltar ao portfólio",
     category: "Engenharia de Dados · Analytics · IA Aplicada",
     title: "EI DataBot",
-    version: "v0.1.0-alpha.1 · Referência: 03/11/2026",
+    version: "v0.1.1 · 22/11/2026",
     headline: "Da engenharia de dados à consulta analítica com IA",
     introduction:
-      "Plataforma experimental que integra dados públicos do INEP e do IBGE/SIDRA. " +
-      "Um pipeline Raw → Bronze → Silver → Gold prepara dados analíticos em Parquet e PostgreSQL. " +
-      "Dashboards independentes exploram a camada Gold, enquanto um chatbot React consulta uma API FastAPI " +
-      "com interpretação Gemini, SQL autorizado e contexto documental recuperado por RAG.",
+      "O EI DataBot reúne dados públicos do INEP e do IBGE/SIDRA para explorar indicadores educacionais. " +
+      "Os dados passam pelas camadas Raw, Bronze, Silver e Gold, com armazenamento em Parquet e PostgreSQL. " +
+      "Dashboards ajudam a visualizar os resultados, enquanto um chatbot em React utiliza uma API FastAPI " +
+      "para consultar os dados com Gemini, SQL controlado e contexto recuperado por RAG.",
     note:
-      "Alpha 1 em desenvolvimento local. Os resultados e as verificações apresentados correspondem " +
-      "a execuções registradas, não à disponibilidade contínua de um serviço em produção. " +
-      "A aplicação não está preparada para exposição pública sem controles de acesso.",
+      "A v0.1.1 segue em desenvolvimento local. Os números desta página vêm de " +
+      "execuções validadas, não de um serviço disponível continuamente. " +
+      "Ainda faltam controles de acesso para disponibilizar a aplicação ao público.",
     github: "Repositório no GitHub",
-    release: "Código da Alpha 1",
-    statsTitle: "Resultados validados da Alpha 1",
+    release: "Release v0.1.1",
+    statsTitle: "Resultados validados",
     statsNote: "Números da última execução; não são métricas em tempo real.",
     stats: [
       { value: "2.702.972", label: "Registros publicados nas 10 tabelas Gold do PostgreSQL" },
@@ -135,11 +135,10 @@ const pageCopy: Record<Language, EIDataBotContent> = {
       {
         title: "API e chatbot analítico",
         description:
-          "Integração funcional entre FastAPI, Gemini, PostgreSQL e RAG, " +
+          "Integração validada entre FastAPI, Gemini, PostgreSQL e RAG, " +
           "com consultas SQL controladas. A capacidade conversacional " +
-          "ainda é limitada, com poucos indicadores disponíveis e " +
-          "necessidade de ampliar a interpretação de perguntas, " +
-          "os testes e a validação funcional.",
+          "permanece limitada a dois indicadores autorizados. " +
+          "A ampliação das consultas e dos testes funcionais continua em evolução.",
         status: "limited"
       },
       {
@@ -213,7 +212,7 @@ const pageCopy: Record<Language, EIDataBotContent> = {
     ],
     roadmapTitle: "Próximas evoluções",
     roadmap: [
-      "Concluir a revisão das regras documentais e validar a recuperação RAG.",
+      "Concluir a revisão e aprovação das regras documentais do RAG.",
       "Ampliar os testes funcionais: séries, educação superior/EAD, geografia e ausência de dados.",
       "Implementar autenticação, autorização, isolamento de sessões e demais controles de segurança.",
       "Auditar dependências, credenciais, privilégios PostgreSQL e histórico do Git antes de publicar.",
@@ -229,20 +228,20 @@ const pageCopy: Record<Language, EIDataBotContent> = {
     back: "Back to portfolio",
     category: "Data Engineering · Analytics · Applied AI",
     title: "EI DataBot",
-    version: "v0.1.0-alpha.1 · Reference: Nov 3, 2026",
+    version: "v0.1.1 · Nov 22, 2026",
     headline: "From education data engineering to AI-assisted analytics",
     introduction:
-      "An experimental platform integrating public data from Brazil's INEP and IBGE/SIDRA. " +
-      "A Raw → Bronze → Silver → Gold pipeline prepares analytical data in Parquet and PostgreSQL. " +
-      "Standalone dashboards explore the Gold layer, while a React chatbot uses FastAPI, " +
-      "Gemini-based interpretation, authorized SQL, and document context retrieved through RAG.",
+      "EI DataBot brings together public data from Brazil's INEP and IBGE/SIDRA to explore education indicators. " +
+      "Data moves through Raw, Bronze, Silver, and Gold layers, with storage in Parquet and PostgreSQL. " +
+      "Dashboards make the results easier to explore, while a React chatbot uses FastAPI " +
+      "to query the data with Gemini, controlled SQL, and context retrieved through RAG.",
     note:
-      "Alpha 1 is under local development. Reported figures and checks come from recorded validation " +
-      "runs, not a continuously available production service. The application is not ready for public access.",
+      "Version v0.1.1 is still being developed locally. The figures shown here come from validated " +
+      "runs, not a continuously available service. Access controls are still needed before public deployment.",
     github: "GitHub repository",
-    release: "Alpha 1 source code",
-    statsTitle: "Alpha 1 validated results",
-    statsNote: "Figures from the last validated run during refactoring, not live metrics.",
+    release: "Release v0.1.1",
+    statsTitle: "Validated results",
+    statsNote: "Figures from validated runs, not live metrics.",
     stats: [
       { value: "2,702,972", label: "Records published across 10 PostgreSQL Gold tables" },
       { value: "27/27", label: "Steps completed in the full education ETL run" },
@@ -297,10 +296,10 @@ const pageCopy: Record<Language, EIDataBotContent> = {
       {
         title: "Analytical API and chatbot",
         description:
-          "Functional integration between FastAPI, Gemini, PostgreSQL, and RAG, " +
+          "Validated integration between FastAPI, Gemini, PostgreSQL, and RAG, " +
           "with controlled SQL queries. Conversational capabilities remain limited, " +
-          "with only a few available indicators; question interpretation, " +
-          "testing, and functional validation still need improvement.",
+          "with two authorized indicators. Additional query scenarios " +
+          "and functional tests remain under development.",
         status: "limited"
       },
       {
@@ -374,7 +373,7 @@ const pageCopy: Record<Language, EIDataBotContent> = {
     ],
     roadmapTitle: "Next steps",
     roadmap: [
-      "Finish review of business rules and validate RAG retrieval.",
+      "Complete the review and approval of RAG business rules.",
       "Expand functional tests for time series, higher education, geography, and missing data.",
       "Implement identity-based authentication, authorization, session isolation, and security controls.",
       "Audit dependencies, secrets, PostgreSQL privileges, and Git history before deployment.",
@@ -388,7 +387,7 @@ const pageCopy: Record<Language, EIDataBotContent> = {
   }
 };
 
-/** Presents Alpha 1 capabilities and limitations without implying production readiness. */
+/** Presents v0.1.1 capabilities and limitations without implying production readiness. */
 const EIDataBotPage = () => {
   const { language } = useLanguage();
   const content = pageCopy[language === "en" ? "en" : "pt"];

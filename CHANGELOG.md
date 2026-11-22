@@ -6,6 +6,17 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Resolved seven moderate-severity transitive dependency vulnerabilities by updating typescript-eslint to 8.73.0.
+- Confirmed zero reported vulnerabilities in development and production dependencies.
+
+### Changed
+
+- Updated the EI DataBot project presentation to reference v0.1.1.
+- Updated Portuguese and English descriptions to reflect validated PostgreSQL, RAG, and chatbot integration.
+- Updated the release link while preserving Alpha-stage security and business-rule limitations.
+
 ## [0.1.1] - 2026-11-22
 
 ### Changed

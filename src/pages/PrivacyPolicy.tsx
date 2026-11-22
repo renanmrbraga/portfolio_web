@@ -1,97 +1,67 @@
-import React from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageToggle } from "@/components/LanguageToggle";
+import { PageContent } from "@/components/PageContent";
+import { PageSection, PageTitle } from "@/components/PageSection";
 import { useLanguage } from "@/components/useLanguage";
 
+/** Conteúdo jurídico da política, com navegação global fornecida pelo Layout. */
 const PrivacyPolicy = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="bg-background text-foreground min-h-screen theme-transition">
-      <Navbar />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center space-x-2">
-          <LanguageToggle />
-          <ThemeToggle />
-        </div>
+    <PageContent size="reading" className="space-y-8">
+      <PageTitle>{t("privacy.title")}</PageTitle>
 
-        <div className="py-16 max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8 dark:text-white text-gray-900">
-            {t("privacy.title")}
-          </h1>
+      <div className="space-y-10 text-base leading-relaxed text-gray-700 dark:text-gray-300">
+        <p>{t("privacy.updated")}</p>
 
-          <div className="prose dark:prose-invert max-w-none">
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.updated")}</p>
+        <PageSection headingId="privacy-section1" title={t("privacy.section1")}>
+          <p>{t("privacy.section1.desc")}</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>{t("privacy.section1.item1")}</li>
+            <li>{t("privacy.section1.item2")}</li>
+            <li>{t("privacy.section1.item3")}</li>
+          </ul>
+        </PageSection>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("privacy.section1")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.section1.desc")}</p>
-            <ul className="list-disc pl-6 mb-6 dark:text-gray-300 text-gray-700">
-              <li className="mb-2">{t("privacy.section1.item1")}</li>
-              <li className="mb-2">{t("privacy.section1.item2")}</li>
-              <li className="mb-2">{t("privacy.section1.item3")}</li>
-            </ul>
+        <PageSection headingId="privacy-section2" title={t("privacy.section2")}>
+          <p>{t("privacy.section2.desc")}</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>{t("privacy.section2.item1")}</li>
+            <li>{t("privacy.section2.item2")}</li>
+            <li>{t("privacy.section2.item3")}</li>
+            <li>{t("privacy.section2.item4")}</li>
+          </ul>
+        </PageSection>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("privacy.section2")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.section2.desc")}</p>
-            <ul className="list-disc pl-6 mb-6 dark:text-gray-300 text-gray-700">
-              <li className="mb-2">{t("privacy.section2.item1")}</li>
-              <li className="mb-2">{t("privacy.section2.item2")}</li>
-              <li className="mb-2">{t("privacy.section2.item3")}</li>
-              <li className="mb-2">{t("privacy.section2.item4")}</li>
-            </ul>
+        <PageSection headingId="privacy-section3" title={t("privacy.section3")}>
+          <p>{t("privacy.section3.desc")}</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>{t("privacy.section3.item1")}</li>
+            <li>{t("privacy.section3.item2")}</li>
+            <li>{t("privacy.section3.item3")}</li>
+          </ul>
+        </PageSection>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("privacy.section3")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.section3.desc")}</p>
-            <ul className="list-disc pl-6 mb-6 dark:text-gray-300 text-gray-700">
-              <li className="mb-2">{t("privacy.section3.item1")}</li>
-              <li className="mb-2">{t("privacy.section3.item2")}</li>
-              <li className="mb-2">{t("privacy.section3.item3")}</li>
-            </ul>
+        <PageSection headingId="privacy-section4" title={t("privacy.section4")}>
+          <p>{t("privacy.section4.desc")}</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>{t("privacy.section4.item1")}</li>
+            <li>{t("privacy.section4.item2")}</li>
+            <li>{t("privacy.section4.item3")}</li>
+            <li>{t("privacy.section4.item4")}</li>
+          </ul>
+        </PageSection>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("privacy.section4")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.section4.desc")}</p>
-            <ul className="list-disc pl-6 mb-6 dark:text-gray-300 text-gray-700">
-              <li className="mb-2">{t("privacy.section4.item1")}</li>
-              <li className="mb-2">{t("privacy.section4.item2")}</li>
-              <li className="mb-2">{t("privacy.section4.item3")}</li>
-              <li className="mb-2">{t("privacy.section4.item4")}</li>
-            </ul>
+        {/* GA4 e informações sobre consentimento mantidos integralmente. */}
+        <PageSection headingId="privacy-analytics-title" title={t("privacy.analytics.title")}>
+          <p>{t("privacy.analytics.desc")}</p>
+          <p>{t("privacy.analytics.consent")}</p>
+        </PageSection>
 
-            {/* Google Analytics 4 e gerenciamento do consentimento */}
-            <section aria-labelledby="privacy-analytics-title">
-              <h2
-                id="privacy-analytics-title"
-                className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900"
-              >
-                {t("privacy.analytics.title")}
-              </h2>
-
-              <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.analytics.desc")}</p>
-
-              <p className="mb-6 dark:text-gray-300 text-gray-700">
-                {t("privacy.analytics.consent")}
-              </p>
-            </section>
-
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("privacy.section5")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("privacy.section5.desc")}</p>
-          </div>
-        </div>
-        <Footer />
+        <PageSection headingId="privacy-section5" title={t("privacy.section5")}>
+          <p>{t("privacy.section5.desc")}</p>
+        </PageSection>
       </div>
-    </div>
+    </PageContent>
   );
 };
 

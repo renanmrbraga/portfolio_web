@@ -41,26 +41,16 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="site-container-wide">
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center space-x-4">
             <Link
               to="/"
-              className="font-bold text-xl dark:text-white text-gray-900 flex items-center"
+              className="flex items-center font-bold text-xl text-gray-900 dark:text-white"
             >
               <Home className="mr-2 h-5 w-5" />
               RB
             </Link>
-
-            <a
-              href="https://www.linkedin.com/in/renanmrbraga"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-xl dark:text-blue-400 text-blue-700 flex items-center"
-            >
-              <Linkedin className="mr-2 h-5 w-5" />
-              LinkedIn
-            </a>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -68,10 +58,11 @@ const Navbar = () => {
               <LanguageToggle />
               <ThemeToggle />
             </div>
+
             <Button
               variant="outline"
               size="sm"
-              className="dark:border-gray-700 dark:text-gray-300 border-gray-300 text-gray-800"
+              className="border-gray-300 text-gray-800 dark:border-gray-700 dark:text-gray-300"
               asChild
             >
               <a href="https://github.com/renanmrbraga" target="_blank" rel="noopener noreferrer">
@@ -79,7 +70,24 @@ const Navbar = () => {
                 GitHub
               </a>
             </Button>
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" asChild>
+
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-gray-300 text-gray-800 dark:border-gray-700 dark:text-gray-300"
+              asChild
+            >
+              <a
+                href="https://www.linkedin.com/in/renanmrbraga"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="mr-1 h-4 w-4" />
+                LinkedIn
+              </a>
+            </Button>
+
+            <Button size="sm" className="bg-red-700 text-white hover:bg-red-800" asChild>
               <Link to="/contact">
                 <User className="mr-1 h-4 w-4" />
                 {t("contact")}
@@ -128,7 +136,21 @@ const Navbar = () => {
                 GitHub
               </a>
             </Button>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full" asChild>
+            <Button
+              variant="outline"
+              className="w-full border-gray-300 text-gray-800 dark:border-gray-700 dark:text-gray-300"
+              asChild
+            >
+              <a
+                href="https://www.linkedin.com/in/renanmrbraga"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="mr-2 h-4 w-4" />
+                LinkedIn
+              </a>
+            </Button>
+            <Button className="bg-red-700 text-white hover:bg-red-800" asChild>
               <Link to="/contact">
                 <User className="mr-2 h-4 w-4" />
                 {t("contact")}

@@ -138,19 +138,7 @@ const translations = {
     "skills.section.ai": "IA Generativa",
     "skills.section.db": "Bancos de Dados & Infra",
     "skills.section.web": "Desenvolvimento & Integrações",
-    "skills.section.marketing": "Marketing Digital",
-    "skills.list.etlCore": "Python, SQL, Polars, Pandas",
-    "skills.list.etlFormats": "ETL/ELT, Modelagem Dimensional, PyArrow, Parquet, APIs REST",
-    "skills.list.biTools": "Power BI (DAX), Excel Avançado, Metabase",
-    "skills.list.biAnalysis": "Streamlit, Plotly, Matplotlib, ECharts",
-    "skills.list.mlMethods": "Análise Estatística, Classificação, Regressão, Clusterização",
-    "skills.list.mlLibraries": "Scikit-learn",
-    "skills.list.aiModels": "LLMs, RAG",
-    "skills.list.aiTechniques": "Embeddings, Engenharia de Prompts",
-    "skills.list.db": "PostgreSQL (JSONB, pgvector), NoSQL",
-    "skills.list.infra": "Docker, Git, Cloud",
-    "skills.list.web": "FastAPI, JavaScript, TypeScript, HTML, CSS, PHP",
-    "skills.list.marketing": "Google Ads, Meta Ads, GA4, GTM"
+    "skills.section.marketing": "Marketing Digital"
   },
   en: {
     // SEO
@@ -278,19 +266,7 @@ const translations = {
     "skills.section.ai": "Generative AI",
     "skills.section.db": "Databases & Infrastructure",
     "skills.section.web": "Development & Integrations",
-    "skills.section.marketing": "Digital Marketing",
-    "skills.list.etlCore": "Python, SQL, Polars, Pandas",
-    "skills.list.etlFormats": "ETL/ELT, Dimensional Modeling, PyArrow, Parquet, REST APIs",
-    "skills.list.biTools": "Power BI (DAX), Advanced Excel, Metabase",
-    "skills.list.biAnalysis": "Streamlit, Plotly, Matplotlib, ECharts",
-    "skills.list.mlMethods": "Statistical Analysis, Classification, Regression, Clustering",
-    "skills.list.mlLibraries": "Scikit-learn",
-    "skills.list.aiModels": "LLMs, RAG",
-    "skills.list.aiTechniques": "Embeddings, Prompt Engineering",
-    "skills.list.db": "PostgreSQL (JSONB, pgvector), NoSQL",
-    "skills.list.infra": "Docker, Git, Cloud",
-    "skills.list.web": "FastAPI, JavaScript, TypeScript, HTML, CSS, PHP",
-    "skills.list.marketing": "Google Ads, Meta Ads, GA4, GTM"
+    "skills.section.marketing": "Digital Marketing"
   }
 };
 

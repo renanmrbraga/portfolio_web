@@ -1,72 +1,52 @@
-import React from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageToggle } from "@/components/LanguageToggle";
+import { PageContent } from "@/components/PageContent";
+import { PageSection, PageTitle } from "@/components/PageSection";
 import { useLanguage } from "@/components/useLanguage";
 
+/** Conteúdo jurídico dos termos, com navegação global fornecida pelo Layout. */
 const TermsOfUse = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="bg-background text-foreground min-h-screen theme-transition">
-      <Navbar />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center space-x-2">
-          <LanguageToggle />
-          <ThemeToggle />
+    <PageContent className="max-w-3xl space-y-10">
+      <PageTitle>{t("terms.title")}</PageTitle>
+
+      <div className="space-y-10 text-base leading-relaxed text-gray-700 dark:text-gray-300">
+        <div className="space-y-4">
+          <p>{t("terms.updated")}</p>
+          <p>{t("terms.intro")}</p>
         </div>
 
-        <div className="py-16 max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8 dark:text-white text-gray-900">
-            {t("terms.title")}
-          </h1>
+        <PageSection headingId="terms-section1" title={t("terms.section1")}>
+          <p>{t("terms.section1.desc")}</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>{t("terms.section1.item1")}</li>
+            <li>{t("terms.section1.item2")}</li>
+            <li>{t("terms.section1.item3")}</li>
+          </ul>
+        </PageSection>
 
-          <div className="prose dark:prose-invert max-w-none">
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.updated")}</p>
+        <PageSection headingId="terms-section2" title={t("terms.section2")}>
+          <p>{t("terms.section2.desc1")}</p>
+          <p>{t("terms.section2.desc2")}</p>
+        </PageSection>
 
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.intro")}</p>
+        <PageSection headingId="terms-section3" title={t("terms.section3")}>
+          <p>{t("terms.section3.desc")}</p>
+        </PageSection>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("terms.section1")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.section1.desc")}</p>
-            <ul className="list-disc pl-6 mb-6 dark:text-gray-300 text-gray-700">
-              <li className="mb-2">{t("terms.section1.item1")}</li>
-              <li className="mb-2">{t("terms.section1.item2")}</li>
-              <li className="mb-2">{t("terms.section1.item3")}</li>
-            </ul>
+        <PageSection headingId="terms-section4" title={t("terms.section4")}>
+          <p>{t("terms.section4.desc")}</p>
+        </PageSection>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("terms.section2")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.section2.desc1")}</p>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.section2.desc2")}</p>
+        <PageSection headingId="terms-section5" title={t("terms.section5")}>
+          <p>{t("terms.section5.desc")}</p>
+        </PageSection>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("terms.section3")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.section3.desc")}</p>
-
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("terms.section4")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.section4.desc")}</p>
-
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("terms.section5")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.section5.desc")}</p>
-
-            <h2 className="text-xl font-semibold mt-8 mb-4 dark:text-white text-gray-900">
-              {t("terms.section6")}
-            </h2>
-            <p className="mb-4 dark:text-gray-300 text-gray-700">{t("terms.section6.desc")}</p>
-          </div>
-        </div>
-        <Footer />
+        <PageSection headingId="terms-section6" title={t("terms.section6")}>
+          <p>{t("terms.section6.desc")}</p>
+        </PageSection>
       </div>
-    </div>
+    </PageContent>
   );
 };
 

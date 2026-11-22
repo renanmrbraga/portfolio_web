@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/useLanguage";
 import {
   getAnalyticsConsent,
@@ -9,14 +10,13 @@ import {
 } from "@/lib/analytics-consent";
 
 /**
- * Exibe o aviso quando não existe uma decisão ou quando
- * o visitante solicita a revisão de suas preferências.
+ * Exibe o aviso de consentimento ou permite revisar
+ * as preferências de privacidade do visitante.
  */
 export function AnalyticsConsent() {
   const { language } = useLanguage();
 
   const [consent, setConsent] = useState<ConsentValue>(getAnalyticsConsent);
-
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -34,10 +34,7 @@ export function AnalyticsConsent() {
 
   const handleChoice = (choice: "granted" | "denied") => {
     setAnalyticsConsent(choice);
-
-    const saved = getAnalyticsConsent();
-
-    setConsent(saved);
+    setConsent(getAnalyticsConsent());
     setIsOpen(false);
   };
 
@@ -51,15 +48,23 @@ export function AnalyticsConsent() {
     <section
       role="region"
       aria-label={isEnglish ? "Privacy preferences" : "Preferências de privacidade"}
-      className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-xl dark:border-gray-700 dark:bg-gray-900 sm:p-6"
+      className="
+        fixed inset-x-4 bottom-4 z-[100]
+        mx-auto w-auto max-w-3xl
+        rounded-xl border border-border
+        bg-background p-5
+        text-foreground shadow-xl
+        transition-colors
+        sm:p-6
+      "
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <div className="min-w-0 flex-1">
-          <h2 className="mb-2 text-base font-semibold text-gray-900 dark:text-gray-100">
+          <h2 className="mb-2 text-base font-bold text-foreground">
             {isEnglish ? "Privacy and analytics" : "Privacidade e análise de visitas"}
           </h2>
 
-          <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             {isEnglish
               ? "This portfolio uses Google Analytics only with your permission to analyze visits and improve the experience. You can decline without affecting navigation."
               : "Este portfólio utiliza o Google Analytics apenas com sua autorização para analisar visitas e melhorar a experiência. Você pode recusar sem prejudicar a navegação."}
@@ -67,28 +72,42 @@ export function AnalyticsConsent() {
 
           <Link
             to="/privacy-policy"
-            className="mt-2 inline-block text-sm text-blue-600 underline-offset-2 hover:underline dark:text-blue-400"
+            className="
+              mt-2 inline-block
+              rounded-sm text-sm
+              text-red-700
+              underline-offset-2
+              transition-colors
+              hover:text-red-800
+              hover:underline
+              dark:text-red-400
+              dark:hover:text-red-300
+              focus-visible:outline
+              focus-visible:outline-2
+              focus-visible:outline-offset-4
+            "
           >
             {isEnglish ? "Privacy Policy" : "Política de Privacidade"}
           </Link>
         </div>
 
         <div className="flex shrink-0 gap-2 sm:flex-col">
-          <button
+          <Button
             type="button"
             onClick={() => handleChoice("granted")}
-            className="flex-1 rounded-md bg-blue-600 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 sm:flex-none"
+            className="flex-1 bg-red-700 text-white hover:bg-red-800 sm:flex-none"
           >
             {isEnglish ? "Accept" : "Aceitar"}
-          </button>
+          </Button>
 
-          <button
+          <Button
             type="button"
+            variant="outline"
             onClick={() => handleChoice("denied")}
-            className="flex-1 rounded-md border border-gray-300 px-5 py-2 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800 sm:flex-none"
+            className="flex-1 sm:flex-none"
           >
             {isEnglish ? "Decline" : "Recusar"}
-          </button>
+          </Button>
         </div>
       </div>
     </section>

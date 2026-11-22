@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ExternalLink, Github } from "lucide-react";
 
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import { PageCard } from "@/components/PageCard";
+import { PageContent } from "@/components/PageContent";
+import { PageSection, PageTitle } from "@/components/PageSection";
+import { PageBulletList, PageText } from "@/components/PageText";
+import { ShowcaseTags } from "@/components/Showcase";
 import { useLanguage } from "@/components/useLanguage";
 import { Button } from "@/components/ui/button";
 import { EI_DATABOT_GITHUB, EI_DATABOT_PREVIEW, EI_DATABOT_RELEASE } from "@/content/ei-databot";
@@ -17,7 +19,7 @@ type Feature = {
   status: Status;
 };
 
-type PageContent = {
+type EIDataBotContent = {
   back: string;
   category: string;
   title: string;
@@ -58,7 +60,7 @@ type PageContent = {
   securityDescription: string;
 };
 
-const pageCopy: Record<Language, PageContent> = {
+const pageCopy: Record<Language, EIDataBotContent> = {
   pt: {
     back: "Voltar ao portfólio",
     category: "Engenharia de Dados · Analytics · IA Aplicada",
@@ -393,76 +395,66 @@ const EIDataBotPage = () => {
   const [previewAvailable, setPreviewAvailable] = useState(true);
 
   return (
-    <div className="min-h-screen bg-background text-foreground theme-transition">
-      <Navbar />
+    <PageContent>
+      {/* Apresentação principal */}
+      <header className="mb-14 space-y-5">
+        <p className="text-sm font-semibold uppercase tracking-wide text-red-700 dark:text-red-400">
+          {content.category}
+        </p>
 
-      <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-        <Link
-          to="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-gray-600 hover:text-blue-700 dark:text-gray-300 dark:hover:text-blue-400"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {content.back}
-        </Link>
+        <PageTitle>{content.title}</PageTitle>
 
-        <header className="mb-12 space-y-5">
-          <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
-            {content.category}
-          </p>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
-            {content.title}
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{content.version}</p>
-          <h2 className="max-w-3xl text-xl font-medium text-gray-700 dark:text-gray-200">
-            {content.headline}
-          </h2>
-          <p className="max-w-3xl text-base leading-relaxed text-gray-700 dark:text-gray-300">
-            {content.introduction}
-          </p>
-          <p className="max-w-3xl border-l-2 border-blue-500 pl-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-            {content.note}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Button asChild variant="outline">
-              <a href={EI_DATABOT_GITHUB} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" />
-                {content.github}
-              </a>
-            </Button>
-            <Button asChild variant="outline">
-              <a href={EI_DATABOT_RELEASE} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2 h-4 w-4" />
-                {content.release}
-              </a>
-            </Button>
-          </div>
-        </header>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{content.version}</p>
 
-        <section className="mb-14" aria-labelledby="results-heading">
-          <h2 id="results-heading" className="mb-2 text-2xl font-bold">
-            {content.statsTitle}
-          </h2>
-          <p className="mb-6 text-sm text-gray-600 dark:text-gray-300">{content.statsNote}</p>
+        <h2 className="text-xl font-medium text-gray-900 dark:text-white">{content.headline}</h2>
+
+        <PageText>{content.introduction}</PageText>
+
+        <PageText tone="muted" className="border-l-2 border-red-700 pl-4 dark:border-red-500">
+          {content.note}
+        </PageText>
+
+        <div className="flex flex-wrap gap-3">
+          <Button asChild variant="outline">
+            <a href={EI_DATABOT_GITHUB} target="_blank" rel="noopener noreferrer">
+              <Github className="mr-2 h-4 w-4" />
+              {content.github}
+            </a>
+          </Button>
+
+          <Button asChild variant="outline">
+            <a href={EI_DATABOT_RELEASE} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="mr-2 h-4 w-4" />
+              {content.release}
+            </a>
+          </Button>
+        </div>
+      </header>
+
+      {/* Seções com espaçamento global uniforme */}
+      <div className="space-y-16">
+        {/* Resultados */}
+        <PageSection headingId="results-heading" title={content.statsTitle}>
+          <PageText tone="muted">{content.statsNote}</PageText>
+
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {content.stats.map(({ label, value }) => (
-              <div key={label} className="rounded-xl border p-5">
-                <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">{value}</p>
+              <PageCard key={label} className="p-5">
+                <p className="text-2xl font-bold text-red-700 dark:text-red-400">{value}</p>
+
                 <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
                   {label}
                 </p>
-              </div>
+              </PageCard>
             ))}
           </div>
-        </section>
+        </PageSection>
 
-        <section className="mb-14" aria-labelledby="dashboard-heading">
-          <h2 id="dashboard-heading" className="mb-4 text-2xl font-bold">
-            {content.dashboardTitle}
-          </h2>
-          <p className="mb-5 max-w-3xl text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-            {content.dashboardDescription}
-          </p>
-          <figure className="overflow-hidden rounded-xl border bg-gray-50 dark:bg-gray-900">
+        {/* Dashboard */}
+        <PageSection headingId="dashboard-heading" title={content.dashboardTitle}>
+          <PageText>{content.dashboardDescription}</PageText>
+
+          <PageCard as="figure" className="overflow-hidden">
             {previewAvailable ? (
               <a
                 href={EI_DATABOT_PREVIEW}
@@ -485,137 +477,100 @@ const EIDataBotPage = () => {
                 {content.dashboardFallback}
               </p>
             )}
-            <figcaption className="border-t px-5 py-4 text-xs leading-relaxed text-gray-600 dark:text-gray-300">
+
+            <figcaption className="border-t px-5 py-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
               {content.dashboardCaption}
             </figcaption>
-          </figure>
-        </section>
+          </PageCard>
+        </PageSection>
 
-        <section className="mb-14" aria-labelledby="architecture-heading">
-          <h2 id="architecture-heading" className="mb-2 text-2xl font-bold">
-            {content.architectureTitle}
-          </h2>
-          <p className="mb-6 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-            {content.architectureDescription}
-          </p>
+        {/* Arquitetura */}
+        <PageSection headingId="architecture-heading" title={content.architectureTitle}>
+          <PageText>{content.architectureDescription}</PageText>
+
           <ol className="space-y-3">
             {content.architecture.map((step, index) => (
-              <li key={step} className="flex items-start gap-3 rounded-lg border p-4">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-800 dark:bg-blue-900/40 dark:text-blue-300">
+              <PageCard as="li" key={step} className="flex items-start gap-3 p-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-700 dark:bg-zinc-900/40 dark:text-zinc-200">
                   {index + 1}
                 </span>
-                <span className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-                  {step}
-                </span>
-              </li>
+
+                <PageText className="min-w-0 flex-1">{step}</PageText>
+              </PageCard>
             ))}
           </ol>
-        </section>
+        </PageSection>
 
-        <section className="mb-14" aria-labelledby="components-heading">
-          <h2 id="components-heading" className="mb-6 text-2xl font-bold">
-            {content.featuresTitle}
-          </h2>
+        {/* Componentes */}
+        <PageSection headingId="components-heading" title={content.featuresTitle}>
           <div className="grid gap-4 md:grid-cols-2">
             {content.features.map(({ title, description, status }) => (
-              <article key={title} className="rounded-xl border p-5">
-                <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-                  <h3 className="text-lg font-semibold">{title}</h3>
+              <PageCard as="article" key={title} className="flex h-full flex-col p-6">
+                <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h3>
+
                   <span className="rounded-full border px-3 py-1 text-xs text-gray-600 dark:text-gray-300">
                     {content.statusLabels[status]}
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-                  {description}
-                </p>
-              </article>
+
+                <PageText>{description}</PageText>
+              </PageCard>
             ))}
           </div>
-        </section>
+        </PageSection>
 
-        <section className="mb-14" aria-labelledby="chatbot-heading">
-          <h2 id="chatbot-heading" className="mb-4 text-2xl font-bold">
-            {content.chatbotTitle}
-          </h2>
-          <p className="mb-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-            {content.chatbotDescription}
-          </p>
+        {/* Chatbot */}
+        <PageSection headingId="chatbot-heading" title={content.chatbotTitle}>
+          <PageText>{content.chatbotDescription}</PageText>
+
           <div className="grid gap-4 sm:grid-cols-2">
             {content.indicators.map(({ code, name, period }) => (
-              <article key={code} className="rounded-xl border p-5">
-                <p className="text-sm font-semibold text-blue-700 dark:text-blue-400">{code}</p>
-                <h3 className="mt-2 font-semibold">{name}</h3>
+              <PageCard as="article" key={code} className="p-6">
+                <p className="text-sm font-semibold text-red-700 dark:text-red-400">{code}</p>
+
+                <h3 className="mt-2 text-lg font-bold text-gray-900 dark:text-white">{name}</h3>
+
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{period}</p>
-              </article>
+              </PageCard>
             ))}
           </div>
-          <p className="mt-4 border-l-2 border-amber-500 pl-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+
+          <PageText tone="muted" className="border-l-2 border-amber-500 pl-4">
             {content.chatbotLimitations}
-          </p>
-        </section>
+          </PageText>
+        </PageSection>
 
-        <section className="mb-14" aria-labelledby="rag-heading">
-          <h2 id="rag-heading" className="mb-4 text-2xl font-bold">
-            {content.ragTitle}
-          </h2>
-          <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-            {content.ragDescription}
-          </p>
-          <p className="mt-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-            {content.ragNote}
-          </p>
-        </section>
+        {/* RAG */}
+        <PageSection headingId="rag-heading" title={content.ragTitle}>
+          <PageText>{content.ragDescription}</PageText>
 
-        <section className="mb-14" aria-labelledby="sources-heading">
-          <h2 id="sources-heading" className="mb-5 text-2xl font-bold">
-            {content.sourcesTitle}
-          </h2>
-          <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-            {content.sources.map((source) => (
-              <li key={source}>{source}</li>
-            ))}
-          </ul>
-        </section>
+          <PageText tone="muted">{content.ragNote}</PageText>
+        </PageSection>
 
-        <section className="mb-14" aria-labelledby="technologies-heading">
-          <h2 id="technologies-heading" className="mb-5 text-2xl font-bold">
-            {content.technologiesTitle}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {content.technologies.map((technology) => (
-              <span
-                key={technology}
-                className="rounded bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-900/40 dark:text-blue-300"
-              >
-                {technology}
-              </span>
-            ))}
-          </div>
-        </section>
+        {/* Fontes */}
+        <PageSection headingId="sources-heading" title={content.sourcesTitle}>
+          <PageBulletList items={content.sources} />
+        </PageSection>
 
-        <section className="mb-14" aria-labelledby="roadmap-heading">
-          <h2 id="roadmap-heading" className="mb-5 text-2xl font-bold">
-            {content.roadmapTitle}
-          </h2>
-          <ul className="list-disc space-y-3 pl-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-            {content.roadmap.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
+        {/* Tecnologias */}
+        <PageSection headingId="technologies-heading" title={content.technologiesTitle}>
+          <ShowcaseTags tags={content.technologies} />
+        </PageSection>
 
-        <section aria-labelledby="security-heading">
-          <h2 id="security-heading" className="mb-4 text-2xl font-bold">
-            {content.securityTitle}
-          </h2>
-          <p className="border-l-2 border-blue-500 pl-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+        {/* Roadmap */}
+        <PageSection headingId="roadmap-heading" title={content.roadmapTitle}>
+          <PageBulletList items={content.roadmap} />
+        </PageSection>
+
+        {/* Segurança */}
+        <PageSection headingId="security-heading" title={content.securityTitle}>
+          <PageText tone="muted" className="border-l-2 border-red-700 pl-4 dark:border-red-500">
             {content.securityDescription}
-          </p>
-        </section>
+          </PageText>
+        </PageSection>
       </div>
-
-      <Footer />
-    </div>
+    </PageContent>
   );
 };
 

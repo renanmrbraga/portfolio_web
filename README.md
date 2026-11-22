@@ -14,6 +14,8 @@ O **Portfolio Web** é meu portfólio profissional, desenvolvido como uma **Sing
 
 A aplicação utiliza **React, TypeScript, Vite e Tailwind CSS**, com componentes reutilizáveis, navegação por rotas, interface responsiva e conteúdo em português e inglês.
 
+A interface utiliza uma arquitetura de componentes compartilhados para padronizar layout, tipografia, cards, badges e espaçamentos em todas as páginas. Essa organização permite modificar a identidade visual centralmente, preservando as funcionalidades específicas de cada seção.
+
 Os projetos apresentados são o próprio **Portfolio Web** e o **EI DataBot**, uma plataforma de engenharia e análise de dados educacionais brasileiros, com pipelines ETL, arquitetura Medallion, PostgreSQL, dashboards e funcionalidades de inteligência artificial em evolução.
 
 O desenvolvimento prioriza simplicidade, desempenho, acessibilidade, privacidade e facilidade de manutenção.
@@ -48,6 +50,24 @@ O desenvolvimento prioriza simplicidade, desempenho, acessibilidade, privacidade
 | Analytics            | Google Analytics 4                | Eventos de navegação e conversão             |
 | Hospedagem           | Vercel                            | Publicação estática e regras de roteamento   |
 
+### Arquitetura visual
+
+A aplicação utiliza componentes reutilizáveis para manter a identidade visual consistente entre as páginas.
+
+| Componente             | Responsabilidade                                     |
+| ---------------------- | ---------------------------------------------------- |
+| `Layout.tsx`           | Estrutura global, Navbar, Footer e SEO               |
+| `PageContent.tsx`      | Centralização e larguras padronizadas                |
+| `PageSection.tsx`      | Títulos e espaçamento das seções                     |
+| `PageCard.tsx`         | Bordas, superfícies e efeitos dos cards              |
+| `PageText.tsx`         | Tipografia e formatação dos textos                   |
+| `Showcase.tsx`         | Apresentação de projetos, competências e tecnologias |
+| `AnalyticsConsent.tsx` | Interface de consentimento analítico                 |
+
+O layout utiliza diferentes larguras conforme a finalidade do conteúdo, mantendo a centralização e a responsividade.
+
+Os textos corridos possuem formatação compartilhada, com alinhamento adequado a dispositivos móveis e desktops. Os temas claro e escuro utilizam uma identidade visual baseada em cores neutras e detalhes em vermelho.
+
 ### Fluxo da aplicação
 
 1. O Vite executa o ambiente de desenvolvimento e compila os arquivos de produção.
@@ -76,9 +96,15 @@ portfolio_web/
 │   ├── generate-seo.mjs      # Geração de HTML com metadados por rota
 │   └── sync-enade.mjs        # Atualização da prévia do ENADE
 ├── src/
-│   ├── components/           # Interface, SEO, consentimento e analytics
-│   │   └── ui/               # Componentes reutilizáveis
-│   ├── content/              # Conteúdo estruturado do EI DataBot
+│   ├── components/
+│   │   ├── ui/               # Componentes de interface
+│   │   ├── Layout.tsx        # Estrutura global das páginas
+│   │   ├── PageContent.tsx   # Contêineres compartilhados
+│   │   ├── PageSection.tsx   # Títulos e seções
+│   │   ├── PageCard.tsx      # Cards reutilizáveis
+│   │   ├── PageText.tsx      # Tipografia compartilhada
+│   │   └── Showcase.tsx      # Projetos, competências e badges
+│   ├── content/              # Conteúdos estruturados dos projetos e competências
 │   ├── hooks/                # Hooks reutilizáveis
 │   ├── lib/                  # Atribuição, analytics e utilitários
 │   ├── pages/                # Páginas da aplicação
@@ -311,6 +337,22 @@ As credenciais privadas de serviços externos não devem ser incluídas no repos
 
 **Site:** https://renanmrbraga.vercel.app/
 
+## Versionamento
+
+O projeto utiliza [Versionamento Semântico](https://semver.org/lang/pt-BR/) para identificar suas versões.
+
+O formato adotado é `MAJOR.MINOR.PATCH`:
+
+- **MAJOR:** alterações incompatíveis com versões anteriores.
+- **MINOR:** novas funcionalidades e melhorias relevantes.
+- **PATCH:** correções e pequenos ajustes.
+
+Durante a fase inicial (`0.x.x`), a aplicação poderá passar por mudanças estruturais significativas.
+
+As versões são identificadas por tags Git e documentadas no [histórico de alterações](CHANGELOG.md).
+
+**Primeira versão registrada:** `v0.1.0`.
+
 ## Melhorias futuras
 
 - [x] Estrutura React, TypeScript e Vite.
@@ -325,6 +367,13 @@ As credenciais privadas de serviços externos não devem ser incluídas no repos
 - [x] Restrição de coleta analítica ao domínio oficial.
 - [x] SEO por página, sitemap e dados estruturados.
 - [x] Revisão de código legado e dependências.
+- [x] Arquitetura visual com componentes reutilizáveis.
+- [x] Padronização de layouts e contêineres entre páginas.
+- [x] Tipografia compartilhada e responsiva.
+- [x] Unificação de cards e badges.
+- [x] Padronização visual dos temas claro e escuro.
+- [x] Revisão da responsividade do rodapé.
+- [x] Estrutura de versionamento e histórico de alterações.
 - [ ] Ampliar os testes automatizados.
 - [ ] Expandir as verificações de acessibilidade.
 - [ ] Monitorar indicadores de desempenho e experiência de navegação.

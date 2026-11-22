@@ -1,30 +1,43 @@
-# Histórico de alterações
+# Changelog
 
-Todas as alterações relevantes do projeto serão documentadas neste arquivo.
+Notable changes to this project are documented here.
 
-O projeto utiliza Versionamento Semântico e mantém o histórico organizado por versões.
+This project follows [Semantic Versioning](https://semver.org/).
 
-## [Não publicado]
+## [Unreleased]
+
+## [0.1.1] - 2026-11-22
+
+### Changed
+
+- Translated the project documentation into English.
+- Simplified README descriptions while preserving technical details.
+- Adopted English as the standard language for documentation and future commit messages.
+
+### Fixed
+
+- Restored attribution redirects for GitHub, LinkedIn, and résumé links.
+- Aligned Vercel redirect rules with the production UTM parameters.
 
 ## [0.1.0] - 2026-11-22
 
-### Adicionado
+### Added
 
-- Componentes compartilhados para layout, páginas e seções.
-- Contêineres com larguras padronizadas.
-- Componentes reutilizáveis para cards e badges.
-- Tipografia compartilhada entre páginas.
-- Estrutura de versionamento do projeto.
+- Shared components for layouts, pages, and sections.
+- Standardized content containers with consistent widths.
+- Reusable components for cards and badges.
+- Shared typography styles across pages.
+- Semantic versioning structure for the project.
 
-### Alterado
+### Changed
 
-- Refatoração da arquitetura visual do portfólio.
-- Padronização das páginas Home, Contato e EI DataBot.
-- Padronização das páginas de Privacidade, Termos e erro 404.
-- Centralização da Navbar, Footer e SEO no Layout.
-- Reorganização da apresentação das competências técnicas.
-- Alinhamento e formatação dos textos do EI DataBot.
-- Unificação visual dos temas claro e escuro.
-- Substituição de destaques azuis por vermelho e tons neutros.
-- Melhorias na responsividade do Footer.
-- Atualização visual do aviso de consentimento analítico.
+- Refactored the portfolio's visual architecture.
+- Standardized the Home, Contact, and EI DataBot pages.
+- Standardized the Privacy Policy, Terms of Use, and 404 pages.
+- Centralized the Navbar, Footer, and SEO within the shared Layout.
+- Reorganized the technical skills presentation.
+- Improved text alignment and formatting on the EI DataBot page.
+- Unified the visual identity across light and dark themes.
+- Replaced blue accents with red and neutral tones.
+- Improved Footer responsiveness on mobile devices.
+- Updated the visual styling of the analytics consent notice.

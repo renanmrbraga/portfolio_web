@@ -6,241 +6,241 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-**[Acessar o portfólio](https://renanmrbraga.vercel.app/?utm_source=github&utm_medium=social&utm_campaign=portfolio&utm_content=portfolio_web)**
+**[View Portfolio](https://renanmrbraga.vercel.app/?utm_source=github&utm_medium=social&utm_campaign=portfolio&utm_content=portfolio_web)**
 
-## Sobre o projeto
+## About the Project
 
-O **Portfolio Web** é meu portfólio profissional, desenvolvido como uma **Single Page Application (SPA)** para apresentar minha atuação como Analista de Dados, minhas competências técnicas e projetos relacionados à engenharia de dados, ciência de dados, automação e inteligência artificial.
+**Portfolio Web** is my professional portfolio, built as a **Single Page Application (SPA)** to showcase my work as a Data Analyst, technical skills, and projects involving data engineering, data science, automation, and artificial intelligence.
 
-A aplicação utiliza **React, TypeScript, Vite e Tailwind CSS**, com componentes reutilizáveis, navegação por rotas, interface responsiva e conteúdo em português e inglês.
+The application uses **React, TypeScript, Vite, and Tailwind CSS**, with reusable components, route-based navigation, a responsive interface, and content in Portuguese and English.
 
-A interface utiliza uma arquitetura de componentes compartilhados para padronizar layout, tipografia, cards, badges e espaçamentos em todas as páginas. Essa organização permite modificar a identidade visual centralmente, preservando as funcionalidades específicas de cada seção.
+Its shared-component architecture standardizes layouts, typography, cards, badges, and spacing across pages. This approach makes it possible to update the visual identity centrally while preserving each section's functionality.
 
-Os projetos apresentados são o próprio **Portfolio Web** e o **EI DataBot**, uma plataforma de engenharia e análise de dados educacionais brasileiros, com pipelines ETL, arquitetura Medallion, PostgreSQL, dashboards e funcionalidades de inteligência artificial em evolução.
+The featured projects are **Portfolio Web** itself and **EI DataBot**, a Brazilian educational data engineering and analytics platform featuring ETL pipelines, Medallion Architecture, PostgreSQL, dashboards, and evolving AI capabilities.
 
-O desenvolvimento prioriza simplicidade, desempenho, acessibilidade, privacidade e facilidade de manutenção.
+Development prioritizes simplicity, performance, accessibility, privacy, and maintainability.
 
-## Funcionalidades
+## Features
 
-- **Apresentação profissional:** perfil, competências técnicas e projetos em destaque.
-- **Projetos:** informações técnicas, tecnologias utilizadas e links para repositórios.
-- **EI DataBot:** página dedicada à arquitetura, aos recursos implementados e à evolução da plataforma.
-- **Internacionalização:** interface e conteúdo em português e inglês.
-- **Temas:** alternância entre modo claro e escuro, com persistência local.
-- **Responsividade:** adaptação para dispositivos móveis e desktop.
-- **Contato:** formulário com Formspree, hCaptcha, honeypot e prevenção de envios simultâneos.
-- **Atribuição de contatos:** captura de parâmetros UTM e informações de origem da visita.
-- **Google Analytics 4:** eventos de navegação e conversão condicionados ao consentimento.
-- **Privacidade:** preferência explícita para coleta analítica, com possibilidade de recusa e revogação.
-- **SEO:** metadados por página, URLs canônicas, sitemap XML, Open Graph, Twitter Cards e dados estruturados.
-- **Navegação:** rotas para início, EI DataBot, contato, política de privacidade e termos de uso.
+- **Professional profile:** background, technical skills, and featured projects.
+- **Projects:** technical descriptions, technologies, and repository links.
+- **EI DataBot:** a dedicated page covering its architecture, implemented features, and ongoing development.
+- **Internationalization:** interface and content in Portuguese and English.
+- **Themes:** light and dark modes with locally persisted preferences.
+- **Responsive design:** layouts adapted to mobile and desktop devices.
+- **Contact:** Formspree form with hCaptcha, honeypot protection, and prevention of concurrent submissions.
+- **Lead attribution:** capture of UTM parameters and visit-source information.
+- **Google Analytics 4:** navigation and conversion events subject to user consent.
+- **Privacy:** explicit analytics consent, including rejection and withdrawal options.
+- **SEO:** page-specific metadata, canonical URLs, XML sitemap, Open Graph, Twitter Cards, and structured data.
+- **Navigation:** routes for Home, EI DataBot, Contact, Privacy Policy, and Terms of Use.
 
-## Tecnologias e arquitetura
+## Technologies & Architecture
 
-| Camada               | Tecnologias                       | Responsabilidade                             |
-| -------------------- | --------------------------------- | -------------------------------------------- |
-| Interface            | React, TypeScript                 | Componentes e páginas                        |
-| Build                | Vite, SWC                         | Desenvolvimento e compilação                 |
-| Estilização          | Tailwind CSS, shadcn/ui, Radix UI | Layout, temas e componentes de interface     |
-| Navegação            | React Router DOM                  | Roteamento da SPA                            |
-| Estado compartilhado | Context API e hooks               | Idioma, tema e preferências                  |
-| SEO                  | React Helmet Async, Node.js       | Metadados dinâmicos e HTML estático por rota |
-| Contato              | Formspree, hCaptcha               | Recebimento de mensagens e proteção antispam |
-| Atribuição           | TypeScript, sessionStorage        | Captura e preservação de UTMs                |
-| Analytics            | Google Analytics 4                | Eventos de navegação e conversão             |
-| Hospedagem           | Vercel                            | Publicação estática e regras de roteamento   |
+| Layer        | Technologies                      | Responsibility                                  |
+| ------------ | --------------------------------- | ----------------------------------------------- |
+| Interface    | React, TypeScript                 | Components and pages                            |
+| Build        | Vite, SWC                         | Development and compilation                     |
+| Styling      | Tailwind CSS, shadcn/ui, Radix UI | Layout, themes, and UI components               |
+| Navigation   | React Router DOM                  | SPA routing                                     |
+| Shared state | Context API and hooks             | Language, theme, and preferences                |
+| SEO          | React Helmet Async, Node.js       | Dynamic metadata and route-specific static HTML |
+| Contact      | Formspree, hCaptcha               | Message delivery and spam protection            |
+| Attribution  | TypeScript, sessionStorage        | UTM capture and persistence                     |
+| Analytics    | Google Analytics 4                | Navigation and conversion events                |
+| Hosting      | Vercel                            | Static deployment and routing rules             |
 
-### Arquitetura visual
+### Visual Architecture
 
-A aplicação utiliza componentes reutilizáveis para manter a identidade visual consistente entre as páginas.
+The application uses reusable components to maintain a consistent visual identity across pages.
 
-| Componente             | Responsabilidade                                     |
-| ---------------------- | ---------------------------------------------------- |
-| `Layout.tsx`           | Estrutura global, Navbar, Footer e SEO               |
-| `PageContent.tsx`      | Centralização e larguras padronizadas                |
-| `PageSection.tsx`      | Títulos e espaçamento das seções                     |
-| `PageCard.tsx`         | Bordas, superfícies e efeitos dos cards              |
-| `PageText.tsx`         | Tipografia e formatação dos textos                   |
-| `Showcase.tsx`         | Apresentação de projetos, competências e tecnologias |
-| `AnalyticsConsent.tsx` | Interface de consentimento analítico                 |
+| Component              | Responsibility                            |
+| ---------------------- | ----------------------------------------- |
+| `Layout.tsx`           | Global structure, Navbar, Footer, and SEO |
+| `PageContent.tsx`      | Centering and standardized content widths |
+| `PageSection.tsx`      | Section headings and spacing              |
+| `PageCard.tsx`         | Card borders, surfaces, and effects       |
+| `PageText.tsx`         | Typography and text formatting            |
+| `Showcase.tsx`         | Projects, skills, and technology badges   |
+| `AnalyticsConsent.tsx` | Analytics consent interface               |
 
-O layout utiliza diferentes larguras conforme a finalidade do conteúdo, mantendo a centralização e a responsividade.
+The layout uses different content widths according to each section's purpose while maintaining centering and responsiveness.
 
-Os textos corridos possuem formatação compartilhada, com alinhamento adequado a dispositivos móveis e desktops. Os temas claro e escuro utilizam uma identidade visual baseada em cores neutras e detalhes em vermelho.
+Body text follows shared formatting rules, with alignment adapted to mobile and desktop screens. Light and dark themes share a visual identity based on neutral colors and red accents.
 
-### Fluxo da aplicação
+### Application Flow
 
-1. O Vite executa o ambiente de desenvolvimento e compila os arquivos de produção.
-2. O React Router identifica a rota acessada e renderiza a página correspondente.
-3. Os providers compartilham preferências de idioma e tema.
-4. O React Helmet Async atualiza os metadados da página.
-5. O processo de build gera arquivos HTML com metadados específicos para as rotas principais.
-6. O sistema de atribuição registra informações de origem da visita durante a sessão.
-7. O formulário encaminha mensagens ao Formspree após a verificação antispam.
-8. O Google Analytics registra eventos apenas quando existe consentimento e o site está no domínio autorizado.
+1. Vite starts the development environment and builds production assets.
+2. React Router resolves the requested route and renders its page.
+3. Providers share language and theme preferences.
+4. React Helmet Async updates page metadata.
+5. The build process generates HTML files with metadata for the main routes.
+6. The attribution system records visit-source information during the session.
+7. The contact form sends messages to Formspree after antispam verification.
+8. Google Analytics records events only with consent and on the authorized domain.
 
-O portfólio **não possui backend próprio**. O processamento de mensagens e a coleta analítica utilizam serviços externos.
+The portfolio **does not have its own backend**. Message processing and analytics collection rely on external services.
 
-## Estrutura do projeto
+## Project Structure
 
 ```text
 portfolio_web/
-├── .github/                  # Configurações do repositório
+├── .github/                  # Repository configuration
 ├── public/
-│   ├── dashboards/           # Imagens e recursos dos dashboards
+│   ├── dashboards/           # Dashboard images and assets
 │   ├── favicon.ico
 │   ├── og-image.png
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── scripts/
-│   ├── generate-seo.mjs      # Geração de HTML com metadados por rota
-│   └── sync-enade.mjs        # Atualização da prévia do ENADE
+│   ├── generate-seo.mjs      # Generate route-specific metadata HTML
+│   └── sync-enade.mjs        # Update the ENADE preview
 ├── src/
 │   ├── components/
-│   │   ├── ui/               # Componentes de interface
-│   │   ├── Layout.tsx        # Estrutura global das páginas
-│   │   ├── PageContent.tsx   # Contêineres compartilhados
-│   │   ├── PageSection.tsx   # Títulos e seções
-│   │   ├── PageCard.tsx      # Cards reutilizáveis
-│   │   ├── PageText.tsx      # Tipografia compartilhada
-│   │   └── Showcase.tsx      # Projetos, competências e badges
-│   ├── content/              # Conteúdos estruturados dos projetos e competências
-│   ├── hooks/                # Hooks reutilizáveis
-│   ├── lib/                  # Atribuição, analytics e utilitários
-│   ├── pages/                # Páginas da aplicação
-│   ├── App.tsx               # Providers e rotas
-│   ├── main.tsx              # Inicialização
-│   └── global.css            # Estilos globais
-├── .env.example              # Exemplo de configuração
-├── eslint.config.js          # Configuração do ESLint
-├── package.json              # Dependências e comandos
-├── package-lock.json         # Dependências resolvidas
-├── tailwind.config.ts        # Configuração do Tailwind CSS
-├── tsconfig.app.json         # Configuração do TypeScript
-├── vercel.json               # Regras de publicação e roteamento
-└── vite.config.ts            # Configuração do Vite
+│   │   ├── ui/               # UI components
+│   │   ├── Layout.tsx        # Global page structure
+│   │   ├── PageContent.tsx   # Shared content containers
+│   │   ├── PageSection.tsx   # Headings and sections
+│   │   ├── PageCard.tsx      # Reusable cards
+│   │   ├── PageText.tsx      # Shared typography
+│   │   └── Showcase.tsx      # Projects, skills, and badges
+│   ├── content/              # Structured project and skill content
+│   ├── hooks/                # Reusable hooks
+│   ├── lib/                  # Attribution, analytics, and utilities
+│   ├── pages/                # Application pages
+│   ├── App.tsx               # Providers and routes
+│   ├── main.tsx              # Application entry point
+│   └── global.css            # Global styles
+├── .env.example              # Example environment configuration
+├── eslint.config.js          # ESLint configuration
+├── package.json              # Dependencies and scripts
+├── package-lock.json         # Locked dependency versions
+├── tailwind.config.ts        # Tailwind CSS configuration
+├── tsconfig.app.json         # TypeScript configuration
+├── vercel.json               # Deployment and routing rules
+└── vite.config.ts            # Vite configuration
 ```
 
-## Executar localmente
+## Running Locally
 
-### 1. Pré-requisitos
+### 1. Prerequisites
 
-- Node.js compatível com o projeto e npm.
+- Node.js compatible with the project and npm.
 - Git.
 
-### 2. Clonar o repositório
+### 2. Clone the Repository
 
 ```bash
 git clone https://github.com/renanmrbraga/portfolio_web.git
 cd portfolio_web
 ```
 
-### 3. Instalar as dependências
+### 3. Install Dependencies
 
 ```bash
 npm ci
 ```
 
-O comando utiliza o `package-lock.json` para uma instalação reproduzível.
+This command uses `package-lock.json` for reproducible installation.
 
-### 4. Configurar as variáveis de ambiente
+### 4. Configure Environment Variables
 
-No PowerShell:
+In PowerShell:
 
 ```powershell
 Copy-Item .env.example .env.local
 ```
 
-Edite `.env.local`:
+Edit `.env.local`:
 
 ```dotenv
-VITE_FORMSPREE_URL=https://formspree.io/f/seu-formulario
-VITE_HCAPTCHA_SITE_KEY=sua-chave-publica-do-hcaptcha
+VITE_FORMSPREE_URL=https://formspree.io/f/your-form-id
+VITE_HCAPTCHA_SITE_KEY=your-public-hcaptcha-site-key
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-**Importante:** variáveis com prefixo `VITE_` são incorporadas ao código disponibilizado ao navegador. Não utilize esse prefixo para senhas, tokens privados ou chaves secretas.
+**Important:** variables prefixed with `VITE_` are bundled into code delivered to the browser. Never use this prefix for passwords, private tokens, or secret keys.
 
-O identificador do Google Analytics é público. A proteção contra manipulação das métricas não depende de manter esse identificador em segredo.
+The Google Analytics measurement ID is public. Preventing analytics manipulation does not depend on keeping this ID secret.
 
-### 5. Iniciar o ambiente de desenvolvimento
+### 5. Start the Development Server
 
 ```bash
 npm run dev
 ```
 
-Acesse:
+Open:
 
 http://localhost:8080/
 
-**Limitações intencionais do ambiente local:**
+**Intentional limitations of the local environment:**
 
-- O Google Analytics não é inicializado em `localhost`.
-- O hCaptcha é desativado localmente.
-- O formulário de contato permanece indisponível para envio nesse ambiente.
+- Google Analytics is not initialized on `localhost`.
+- hCaptcha is disabled locally.
+- Contact form submissions are unavailable in this environment.
 
-Essas restrições evitam a contaminação das métricas de produção e problemas de inicialização do hCaptcha durante o desenvolvimento.
+These restrictions prevent production analytics from being affected by development traffic and avoid hCaptcha initialization issues during local development.
 
-### 6. Gerar a versão de produção
+### 6. Build for Production
 
 ```bash
 npm run build
 npm run preview
 ```
 
-O build executa a sincronização da prévia do ENADE, compila o projeto com Vite e gera os arquivos HTML específicos para SEO.
+The build synchronizes the ENADE preview, compiles the project with Vite, and generates route-specific HTML files for SEO.
 
-A atualização da prévia do ENADE depende das ferramentas de navegador necessárias ao script de sincronização.
+Updating the ENADE preview requires the browser tools used by the synchronization script.
 
-## SEO e indexação
+## SEO & Indexing
 
-O SEO combina **metadados dinâmicos** com arquivos HTML gerados durante o build.
+SEO combines **dynamic metadata** with HTML files generated during the build.
 
-### Metadados dinâmicos
+### Dynamic Metadata
 
-Os componentes utilizam:
+The application uses:
 
 - `src/components/Seo.tsx`
 - `src/lib/page-metadata.ts`
 
-A configuração centralizada fornece títulos e descrições consistentes para a aplicação e os eventos do Google Analytics.
+Centralized configuration provides consistent titles and descriptions for the application and Google Analytics events.
 
-### Metadados estáticos
+### Static Metadata
 
-O script `scripts/generate-seo.mjs` gera HTML específico para as páginas principais.
+The `scripts/generate-seo.mjs` script generates dedicated HTML files for the main pages.
 
-As regras do `vercel.json` direcionam essas rotas para seus respectivos arquivos HTML, preservando o funcionamento do React Router no navegador.
+Rules in `vercel.json` route requests to the corresponding HTML files while preserving React Router navigation in the browser.
 
-### Recursos adicionais
+### Additional Resources
 
-- `public/sitemap.xml`: URLs indexáveis.
-- `public/robots.txt`: orientações para rastreadores.
-- `public/og-image.png`: imagem de compartilhamento.
-- JSON-LD: dados estruturados do proprietário do portfólio.
-- URLs canônicas: endereços sem UTMs ou fragmentos.
-- `noindex`: páginas inexistentes.
+- `public/sitemap.xml`: indexable URLs.
+- `public/robots.txt`: crawler instructions.
+- `public/og-image.png`: social-sharing image.
+- JSON-LD: structured data about the portfolio owner.
+- Canonical URLs: addresses without UTM parameters or fragments.
+- `noindex`: nonexistent pages.
 
-O endereço canônico utilizado é:
+The canonical domain is:
 
-https://renanmrbraga.vercel.app/
+`renanmrbraga.vercel.app`
 
-## Contato e atribuição de origem
+## Contact & Source Attribution
 
-O formulário utiliza **Formspree** para o recebimento de mensagens e **hCaptcha** como mecanismo de proteção antispam.
+The contact form uses **Formspree** to deliver messages and **hCaptcha** for spam protection.
 
-Também inclui:
+It also includes:
 
-- Campo honeypot.
-- Validação de campos obrigatórios.
-- Prevenção de envios simultâneos.
-- Tratamento de falhas de envio.
-- Confirmação sem redirecionar o visitante.
-- Reinicialização do token hCaptcha após a tentativa.
-- Isolamento de erros de renderização do widget.
+- A honeypot field.
+- Required-field validation.
+- Prevention of concurrent submissions.
+- Submission error handling.
+- Confirmation without redirecting the visitor.
+- hCaptcha token reset after an attempted submission.
+- Isolation of widget-rendering errors.
 
-### Parâmetros UTM
+### UTM Parameters
 
-A aplicação reconhece:
+The application recognizes:
 
 ```text
 utm_source
@@ -250,144 +250,132 @@ utm_content
 utm_term
 ```
 
-Também registra, quando disponíveis, informações como página de entrada, referência da visita e data de captura.
+When available, it also records the landing page, referring site, and capture timestamp.
 
-Os dados de atribuição são preservados durante a sessão e encaminhados ao Formspree junto com o formulário.
+Attribution data is preserved throughout the session and submitted to Formspree with the contact form.
 
-Essas informações permitem identificar a origem dos contatos recebidos por links divulgados em diferentes plataformas e campanhas.
+This makes it possible to identify the origin of leads from links shared across different platforms and campaigns.
 
-## Google Analytics 4 e privacidade
+## Google Analytics 4 & Privacy
 
-A integração analítica foi desenvolvida para respeitar a decisão do visitante.
+The analytics integration respects the visitor's choice.
 
-### Consentimento
+### Consent
 
-- O consentimento analítico é negado por padrão.
-- A tag do GA4 só é carregada após autorização.
-- O visitante pode aceitar ou recusar a coleta.
-- A preferência é armazenada no navegador.
-- O rodapé permite reabrir as preferências.
-- A revogação interrompe novos envios analíticos pela aplicação.
+- Analytics consent is denied by default.
+- The GA4 tag loads only after authorization.
+- Visitors can accept or reject analytics collection.
+- Preferences are stored in the browser.
+- The footer provides access to consent preferences.
+- Withdrawing consent stops new analytics events from being sent by the application.
 
-### Eventos
+### Events
 
-| Evento          | Quando é enviado                                  |
-| --------------- | ------------------------------------------------- |
-| `page_view`     | Navegação autorizada entre páginas                |
-| `generate_lead` | Confirmação de envio do formulário pelo Formspree |
+| Event           | When it is sent                                           |
+| --------------- | --------------------------------------------------------- |
+| `page_view`     | Consented navigation between pages                        |
+| `generate_lead` | Successful contact form submission confirmed by Formspree |
 
-Os eventos de visualização são controlados manualmente para evitar duplicações decorrentes da navegação da SPA.
+Page-view events are managed manually to avoid duplicates during SPA navigation.
 
-O `page_view` utiliza o título correspondente à página e preserva somente os parâmetros UTM permitidos na URL enviada.
+The `page_view` event uses the corresponding page title and preserves only the permitted UTM parameters in the reported URL.
 
-O evento `generate_lead` não transmite nome, e-mail ou conteúdo da mensagem.
+The `generate_lead` event does not transmit the visitor's name, email address, or message content.
 
-### Restrição por domínio
+## Quality & Maintenance
 
-A aplicação só inicializa a coleta no domínio:
-
-```text
-renanmrbraga.vercel.app
-```
-
-Isso exclui o ambiente local e os endereços de preview.
-
-O GA4 também permite configurar filtros de hostname para restringir os dados coletados pela tag Web.
-
-**Limitação:** restrições de hostname não representam proteção antifraude absoluta. Eventos falsificados e determinadas requisições externas podem exigir mecanismos adicionais de monitoramento.
-
-## Qualidade e manutenção
-
-O projeto utiliza **TypeScript** e **ESLint** para validação estática.
+The project uses **TypeScript** and **ESLint** for static validation.
 
 ```bash
-# Verificação do código
+# Lint checks
 npx eslint . --max-warnings 0
 
-# Verificação de tipos
+# Type checking
 npx tsc --noEmit -p tsconfig.app.json
 
-# Compilação de produção
+# Production build
 npm run build
 
-# Auditoria de dependências
+# Dependency audit
 npm audit
 ```
 
-Para verificar problemas de formatação antes de um commit:
+To check formatting issues before a commit:
 
 ```bash
 git diff --check
 ```
 
-O build não substitui a verificação de tipos, e a ausência de avisos no ESLint não garante que todos os recursos estejam livres de problemas funcionais.
+A successful build does not replace type checking, and a warning-free ESLint run does not guarantee that every feature works correctly.
 
-## Publicação
+## Deployment
 
-O projeto é publicado pela **Vercel**, com o Vite responsável pela geração dos arquivos estáticos.
+The project is deployed on **Vercel**, with Vite generating the static assets.
 
-A configuração de publicação utiliza:
+The deployment configuration includes:
 
-- Build de produção com geração de metadados por rota.
-- Regras de reescrita para os arquivos HTML de SEO.
-- Fallback para rotas da aplicação React.
-- Variáveis de ambiente configuradas na plataforma.
+- Production builds with route-specific metadata generation.
+- Rewrite rules for SEO HTML files.
+- A fallback for React application routes.
+- Environment variables configured on the platform.
 
-As credenciais privadas de serviços externos não devem ser incluídas no repositório.
+Private credentials for external services must not be committed to the repository.
 
-**Site:** https://renanmrbraga.vercel.app/
+**Website:** [Visit Portfolio](https://renanmrbraga.vercel.app/?utm_source=github&utm_medium=social&utm_campaign=portfolio&utm_content=portfolio_web)
 
-## Versionamento
+## Versioning
 
-O projeto utiliza [Versionamento Semântico](https://semver.org/lang/pt-BR/) para identificar suas versões.
+The project follows [Semantic Versioning](https://semver.org/) to identify releases.
 
-O formato adotado é `MAJOR.MINOR.PATCH`:
+The version format is `MAJOR.MINOR.PATCH`:
 
-- **MAJOR:** alterações incompatíveis com versões anteriores.
-- **MINOR:** novas funcionalidades e melhorias relevantes.
-- **PATCH:** correções e pequenos ajustes.
+- **MAJOR:** incompatible changes.
+- **MINOR:** new features and significant improvements.
+- **PATCH:** fixes and minor adjustments.
 
-Durante a fase inicial (`0.x.x`), a aplicação poderá passar por mudanças estruturais significativas.
+During the initial development phase (`0.x.x`), the application may undergo significant structural changes.
 
-As versões são identificadas por tags Git e documentadas no [histórico de alterações](CHANGELOG.md).
+Versions are identified by Git tags and documented in the [changelog](CHANGELOG.md).
 
-**Primeira versão registrada:** `v0.1.0`.
+**First recorded version:** `v0.1.0`.
 
-## Melhorias futuras
+**Current version:** `v0.1.1`.
 
-- [x] Estrutura React, TypeScript e Vite.
-- [x] Interface responsiva e temas claro/escuro.
-- [x] Conteúdo em português e inglês.
-- [x] Página técnica do EI DataBot.
-- [x] Formulário com Formspree e hCaptcha.
-- [x] Proteção contra envios simultâneos.
-- [x] Rastreamento de origem por UTMs.
-- [x] Integração com Google Analytics 4.
-- [x] Consentimento analítico e possibilidade de revogação.
-- [x] Restrição de coleta analítica ao domínio oficial.
-- [x] SEO por página, sitemap e dados estruturados.
-- [x] Revisão de código legado e dependências.
-- [x] Arquitetura visual com componentes reutilizáveis.
-- [x] Padronização de layouts e contêineres entre páginas.
-- [x] Tipografia compartilhada e responsiva.
-- [x] Unificação de cards e badges.
-- [x] Padronização visual dos temas claro e escuro.
-- [x] Revisão da responsividade do rodapé.
-- [x] Estrutura de versionamento e histórico de alterações.
-- [ ] Ampliar os testes automatizados.
-- [ ] Expandir as verificações de acessibilidade.
-- [ ] Monitorar indicadores de desempenho e experiência de navegação.
+## Roadmap
 
-## Licença
+- [x] React, TypeScript, and Vite foundation.
+- [x] Responsive interface with light and dark themes.
+- [x] Portuguese and English content.
+- [x] Dedicated EI DataBot technical page.
+- [x] Contact form with Formspree and hCaptcha.
+- [x] Protection against concurrent submissions.
+- [x] Source attribution with UTM parameters.
+- [x] Google Analytics 4 integration.
+- [x] Analytics consent and withdrawal options.
+- [x] Restrict analytics collection to the official domain.
+- [x] Page-level SEO, sitemap, and structured data.
+- [x] Legacy-code and dependency review.
+- [x] Reusable visual component architecture.
+- [x] Standardized page layouts and content containers.
+- [x] Shared, responsive typography.
+- [x] Unified cards and badges.
+- [x] Consistent visual styling across light and dark themes.
+- [x] Improved footer responsiveness.
+- [x] Versioning structure and changelog.
+- [ ] Expand automated testing.
+- [ ] Extend accessibility checks.
+- [ ] Monitor performance and user-experience metrics.
 
-Distribuído sob a [Licença MIT](LICENSE).
+## License
 
-## Contato
+Distributed under the [MIT License](LICENSE).
 
-- [Portfólio](https://renanmrbraga.vercel.app/)
+## Contact
+
+- [Portfolio](https://renanmrbraga.vercel.app/?utm_source=github&utm_medium=social&utm_campaign=portfolio&utm_content=portfolio_web)
 - [GitHub](https://github.com/renanmrbraga)
 - [LinkedIn](https://www.linkedin.com/in/renanmrbraga)
 
 ---
 
-© 2026 Renan Braga. Todos os direitos reservados.
+© 2026 Renan Braga. Licensed under MIT.

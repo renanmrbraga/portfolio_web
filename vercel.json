@@ -1,5 +1,22 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/linkedin",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=portfolio&utm_content=perfil_contato",
+      "permanent": false
+    },
+    {
+      "source": "/curriculo",
+      "destination": "/?utm_source=curriculo&utm_medium=pdf&utm_campaign=portfolio",
+      "permanent": false
+    },
+    {
+      "source": "/github",
+      "destination": "/?utm_source=github&utm_medium=social&utm_campaign=portfolio",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/projects/ei-databot",
